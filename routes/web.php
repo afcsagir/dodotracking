@@ -12,7 +12,7 @@ use App\Http\Controllers\ShipperController;
 Route::get('/', [TrackController::class, 'index'])->name('front page');
 Route::post('/', [TrackController::class, 'getData']);
 // Route::get('tes', [TrackController::class, 'getData']);
-Route::get('/token', function(){
+Route::get('/token', function () {
     return csrf_token();
 });
 
@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::get('/profile', [AccountController::class, 'profile'])->name('profile');
+    Route::post('/profile-update', [AccountController::class, 'profileUpdate']);
     Route::post('/change-password', [AccountController::class, 'changePassword'])->name('change password');
 });
 

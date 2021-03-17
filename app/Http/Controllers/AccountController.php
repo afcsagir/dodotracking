@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,8 @@ class AccountController extends Controller
 {
     public function profile()
     {
-        return view('seller.profile');
+        $user = Auth::user();
+        return view('seller.profile', compact('user'));
     }
     public function changePassword(Request $request)
     {
@@ -60,5 +62,31 @@ class AccountController extends Controller
         $validator = Validator::make($input, $rules, $message, $attributes);
 
         return $validator;
+    }
+
+    public function profileUpdate(Request $request)
+    {
+        $request->validate([
+            // 'shop_id' => 'required|unique:users,shop_id|max:4|alpha',
+            'name' => 'required|string|max:255',
+            'contactname' => 'required|string|max:255',
+            'phone' => 'required|numeric',
+            'lineid' => 'required|string|max:25',
+            'email' => 'required|string|email|max:255',
+        ]);
+
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->contactname = $request->contactname;
+        $user->phone = $request->phone;
+        $user->lineid = $request->lineid;
+        $user->email = $request->email;
+        $result = $user->save();
+        if ($result) {
+
+            return redirect()->back()->with('success', 'Profile update succesfully');
+        } else {
+            return redirect()->back()->with('error', 'Wrong Password');
+        }
     }
 }

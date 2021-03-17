@@ -1,25 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
+@extends('master')
+@section('mainContent')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'DodoTracking') }} - Register</title>
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-</head>
-
-<body class="font-sans antialiased overflow-x-hidden">
-    <div class="bg-gray-200">
-        <main>
             <div class="w-screen py-12 flex items-center justify-center flex-col">
                 <div class="flex md:w-1/5 justify-center">
                     <img class="w-6/12 md:w-4/5" src="{{ asset('img/dodotracking.png') }}" alt="">
@@ -47,17 +28,35 @@
                                     @endif
 
                                     <!-- Shop Id -->
-                                    <div>
+                                    {{-- <div>
                                         <x-label for="shop_id">Shop Id</x-label>
 
                                         <x-input id="shop_id" class="block mt-1 w-full" type="text" name="shop_id"
                                             :value="old('shop_id')" required autofocus />
+                                    </div> --}}
+                                    <div class="mt-4">
+                                        <x-label for="username">User Name</x-label>
+
+                                        <x-input id="username" class="block mt-1 w-full" type="text" name="username"
+                                            :value="old('username')" required />
                                     </div>
                                     <div class="mt-4">
-                                        <x-label for="name">Name</x-label>
+                                        <x-label for="shopname">Shop Name</x-label>
 
                                         <x-input id="name" class="block mt-1 w-full" type="text" name="name"
                                             :value="old('name')" required />
+                                    </div>
+                                    <div class="mt-4">
+                                        <x-label for="contactname">Contact Name</x-label>
+
+                                        <x-input id="contactname" class="block mt-1 w-full" type="text" name="contactname"
+                                            :value="old('contactname')" required />
+                                    </div>
+                                    <div class="mt-4">
+                                        <x-label for="phone">Mobile Number</x-label>
+
+                                        <x-input id="phone" class="block mt-1 w-full" type="text" name="phone"
+                                            :value="old('phone')" required />
                                     </div>
 
                                     <!-- Email Address -->
@@ -67,7 +66,12 @@
                                         <x-input id="email" class="block mt-1 w-full" type="email" name="email"
                                             :value="old('email')" required />
                                     </div>
+                                    <div class="mt-4">
+                                        <x-label for="lineid">Line Id</x-label>
 
+                                        <x-input id="lineid" class="block mt-1 w-full" type="text" name="lineid"
+                                            :value="old('lineid')" required />
+                                    </div>
                                     <!-- Password -->
                                     <div class="mt-4">
                                         <x-label for="password">Password</x-label>
@@ -100,8 +104,5 @@
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
-</body>
-
-</html>
+       
+@endsection
