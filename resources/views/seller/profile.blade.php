@@ -100,7 +100,7 @@
                 </div>
                 <div class="mt-4">
                     <label class="block font-medium text-sm text-gray-700">
-                       Shop Name
+                       Email
                     </label>
                     <x-input id="email" class="block mt-1 w-full" type="email" name="email" value="{{$user->email}}" required />     
                 </div>
