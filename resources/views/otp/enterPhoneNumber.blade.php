@@ -29,7 +29,7 @@
                         <div class="p-6 md:px-10 rounded-lg bg-white">
                             <div class="md:flex md:justify-between md:items-center">
                                 <div>
-                                    <h2 class="text-xl text-gray-800 font-bold leading-tight">Enter your Mobile Number</h2>
+                                    <h2 style="margin-left: 10px;" class="text-xl text-gray-800 font-bold leading-tight">Mobile Number</h2>
                                 </div>
                             </div>
                             <div class="line my-4 mx-2 relative">
@@ -63,13 +63,13 @@
                                     @endif
                              
                                     <div>
-                                        <x-label>Mobile Number</x-label>
+                                        <x-label>Enter your  Mobile Number</x-label>
                                         <x-input type="text" name="password"></x-input>
                                     </div>
                                     <div class="flex items-center justify-end mt-6">
                                         
                                         <x-button color="blue" class="ml-4">
-                                            {{ __('Submite') }}
+                                            {{ __('Submit') }}
                                         </x-button>
                                     </div>
                                 </form>

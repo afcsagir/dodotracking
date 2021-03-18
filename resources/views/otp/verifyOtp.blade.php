@@ -29,7 +29,7 @@
                         <div class="p-6 md:px-10 rounded-lg bg-white">
                             <div class="md:flex md:justify-between md:items-center">
                                 <div>
-                                    <h2 class="text-xl text-gray-800 font-bold leading-tight">Verify Mobile</h2>
+                                    <h2 class="text-xl text-gray-800 font-bold leading-tight" style="margin-left: 10px;">Verify Mobile</h2>
                                 </div>
                             </div>
                             <div class="line my-4 mx-2 relative">
