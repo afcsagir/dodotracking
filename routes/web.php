@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\OptController;
 use App\Http\Controllers\ShipperController;
 
 Route::get('/', [TrackController::class, 'index'])->name('front page');
@@ -52,5 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/profile-update', [AccountController::class, 'profileUpdate']);
     Route::post('/change-password', [AccountController::class, 'changePassword'])->name('change password');
 });
-
+Route::get('/verify_mobile', [OptController::class, 'verifyMobile']);
+Route::get('/forget_password', [OptController::class, 'forgetPassword']);
+Route::get('/reset_password', [OptController::class, 'resetPassword']);
 require __DIR__ . '/auth.php';

@@ -11,12 +11,21 @@ use Illuminate\Support\Carbon;
 use App\Models\User;
 use Auth;
 use Datatables;
+use THAIBULKSMS_API\SMS\SMS;
+use Tzsk\Otp\Facades\Otp;
 
 class SellerController extends Controller
 {
     public function dashboard()
     {
-
+        // $unique_secret = 'moinuddin';
+        // $otp = Otp::generate($unique_secret);
+        // // $valid = Otp::match('4369', $unique_secret);
+        // // dd($valid);
+        // $apiKey = '';
+        // $apiSecretKey = '';
+        // $sms = new SMS();
+        ///////////////////////////////////
         $user = Auth::user();
 
         $orders = $user->orders()
