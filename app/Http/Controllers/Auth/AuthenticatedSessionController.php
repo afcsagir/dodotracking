@@ -39,7 +39,11 @@ class AuthenticatedSessionController extends Controller
                 return redirect('admin/dashboard');
             }
 
-            return redirect()->intended(RouteServiceProvider::HOME);
+            // $url = 'https://' . Auth::user()->username . '.shaheedrafiqmkj.edu.bd/dodotracking/public/dashboard';
+            $url = 'https://hello.shaheedrafiqmkj.edu.bd/dodotracking/public/dashboard';
+            // $url = 'https://quizhaat.com/invoiceally_saas_elit/';
+            return redirect($url);
+            //return redirect()->intended(RouteServiceProvider::HOME);
         }
 
         Auth::logout();
