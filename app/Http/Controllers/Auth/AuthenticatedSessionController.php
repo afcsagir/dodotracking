@@ -39,6 +39,13 @@ class AuthenticatedSessionController extends Controller
                 return redirect('admin/dashboard');
             }
 
+            // $company_name = 'hello';
+            // if (isset(Auth::user()->username)) {
+            //     $company_name = str_replace(' ', '_', Auth::user()->username);
+            // }
+
+            // $url = 'http://' . $company_name . '.shaheedrafiqmkj.edu.bd/dodotracking/public/dashboard';
+
             return redirect()->intended(RouteServiceProvider::HOME);
         }
 
@@ -62,5 +69,6 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/signin');
+        //    return redirect('http://shaheedrafiqmkj.edu.bd/dodotracking/public/signin');
     }
 }

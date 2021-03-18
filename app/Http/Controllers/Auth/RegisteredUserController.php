@@ -57,6 +57,15 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
+        // $company_name = 'hello';
+        // if (isset($user->username)) {
+        //     $company_name = str_replace(' ', '_', $user->username);
+        // }
+
+        // $url = 'http://' . $company_name . '.shaheedrafiqmkj.edu.bd/dodotracking/public/signin';
+
+        // return redirect()->intended($url);
+
         return redirect(RouteServiceProvider::HOME);
     }
 }

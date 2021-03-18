@@ -15,6 +15,7 @@
         "laravel/breeze": "^1.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "tzsk/otp": "^5.1",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
