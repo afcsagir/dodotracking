@@ -61,6 +61,12 @@
                                             Your data successfully being inserted
                                         </div>
                                     @endif
+                                    @if (Session::has('successs'))
+                                       
+                                        <div class="text-sm text-green-600">
+                                           {{Session::get('successs')}}
+                                        </div>
+                                    @endif
                                     <div>
                                         <x-label>Email</x-label>
                                         <x-input type="email" name="email"></x-input>
@@ -69,12 +75,20 @@
                                         <x-label>Password</x-label>
                                         <x-input type="password" name="password"></x-input>
                                     </div>
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
+                                    <div class="block mt-4">
+                                        <label for="remember_me" class="inline-flex items-center">
+                                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
+                                            <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center  mt-6">
+                                        <a class="underline text-sm text-gray-600 hover:text-gray-900"
+                                            href="{{ url('forget_password') }}">
+                                            {{ __('Forget Password?') }}
+                                        </a>
+
+                                  
+                                    </div>
                                     <div class="flex items-center justify-end mt-6">
                                         <a class="underline text-sm text-gray-600 hover:text-gray-900"
                                             href="{{ route('register') }}">

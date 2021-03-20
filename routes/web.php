@@ -53,7 +53,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/profile-update', [AccountController::class, 'profileUpdate']);
     Route::post('/change-password', [AccountController::class, 'changePassword'])->name('change password');
 });
-Route::get('/verify_mobile', [OptController::class, 'verifyMobile']);
+Route::get('verify_mobile', [OptController::class, 'verifyMobile'])->name('verify_mobile');
+Route::post('/get-otp', [OptController::class, 'getOtp'])->name('get-otp');
+Route::post('/reset-pass', [OptController::class, 'resetpass'])->name('reset-pass');
+Route::post('/get-phone', [OptController::class, 'getPhone'])->name('get-phone');
 Route::get('/forget_password', [OptController::class, 'forgetPassword']);
 Route::get('/reset_password', [OptController::class, 'resetPassword']);
 require __DIR__ . '/auth.php';

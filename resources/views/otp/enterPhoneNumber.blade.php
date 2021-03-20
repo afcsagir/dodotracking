@@ -36,7 +36,7 @@
                                 @if(session('failed'))
                                 <x-alert-danger>{{ session('failed') }}</x-alert-danger>
                                 @endif
-                                <form method="POST" action="{{ route('signin') }}">
+                                <form method="POST" action="{{ route('get-phone') }}">
                                     @csrf
 
                                     @if ($errors->any())
@@ -64,7 +64,7 @@
                              
                                     <div>
                                         <x-label>Enter your  Mobile Number</x-label>
-                                        <x-input type="text" name="password"></x-input>
+                                        <x-input type="text" name="phone"></x-input>
                                     </div>
                                     <div class="flex items-center justify-end mt-6">
                                         

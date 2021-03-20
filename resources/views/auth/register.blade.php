@@ -46,6 +46,9 @@
                     <form method="POST" action="{{ route('register') }}" style="width: 100%;">
                         @csrf
 
+                        @if(session('failed'))
+                            <x-alert-danger>{{ session('failed') }}</x-alert-danger>
+                        @endif
                         @if ($errors->any())
                         <x-alert-danger>
                             <ul class=" list-disc list-inside text-sm text-red-600">

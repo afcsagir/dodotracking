@@ -36,7 +36,7 @@
                                 @if(session('failed'))
                                 <x-alert-danger>{{ session('failed') }}</x-alert-danger>
                                 @endif
-                                <form method="POST" action="{{ route('signin') }}">
+                                <form method="POST" action="{{ route('reset-pass') }}">
                                     @csrf
 
                                     @if ($errors->any())
@@ -61,21 +61,13 @@
                                             Your data successfully being inserted
                                         </div>
                                     @endif
-                                    {{-- <div>
-                                        <x-label>New Password</x-label>
-                                        <input type="password" name="email" >
-                                    </div>
-                                    <div class="mt-6">
-                                        <x-label>Confirm Password</x-label>
-                                        <input type="password" name="email" >
-                                    </div> --}}
                                     <div>
                                         <x-label>New Password</x-label>
                                         <x-input type="password" name="password"></x-input>
                                     </div>
                                     <div class="mt-6">
                                         <x-label>Confirm Password</x-label>
-                                        <x-input type="password" name="password"></x-input>
+                                        <x-input type="password" name="confirm_password"></x-input>
                                     </div>
                                     <div class="flex items-center justify-end mt-6">
                                         

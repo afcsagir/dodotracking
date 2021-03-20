@@ -36,7 +36,7 @@
                                 @if(session('failed'))
                                 <x-alert-danger>{{ session('failed') }}</x-alert-danger>
                                 @endif
-                                <form method="POST" action="{{ route('signin') }}">
+                                <form method="POST" action="{{ route('get-otp') }}">
                                     @csrf
 
                                     @if ($errors->any())
@@ -61,9 +61,16 @@
                                             Your data successfully being inserted
                                         </div>
                                     @endif
+
+                                    @if(Session::has('user_phone'))
+                                    <input type="hidden" name="for_what" value="1">
+                                    @elseif(Session::has('user_phone1'))
+                                    <input type="hidden" name="for_what" value="2">
+                                    @endif
+
                                     <div>
                                         <x-label>Enter your 4 digit otp here</x-label>
-                                        <x-input type="text" name="password" placeholder="xxxx"></x-input>
+                                        <x-input type="text" name="otp" placeholder="xxxx"></x-input>
                                     </div>
                                
                                     <div class="flex items-center justify-end mt-6">

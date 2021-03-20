@@ -1,6 +1,6 @@
 <?php
 
-namespace THAIBULKSMS_API\SMS;
+namespace App\SMS_ClASS;
 
 class SMS
 {
