@@ -12,7 +12,8 @@ class TrackController extends Controller
 {
     public function index()
     {
-        return view('track');
+        // return view('track');
+        return redirect('/signin');
     }
 
     public function getData(Request $request)

@@ -68,9 +68,10 @@
                                         </div>
                                     @endif
                                     <div>
-                                        <x-label>Email</x-label>
-                                        <x-input type="email" name="email"></x-input>
+                                        <x-label>Phone Number</x-label>
+                                        <x-input type="text"  name="phone"></x-input>
                                     </div>
+                       
                                     <div class="mt-6">
                                         <x-label>Password</x-label>
                                         <x-input type="password" name="password"></x-input>

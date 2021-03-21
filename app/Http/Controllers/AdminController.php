@@ -183,4 +183,44 @@ class AdminController extends Controller
             'status' => 1
         ];
     }
+    public function userLogo()
+    {
+        $users = User::where('role','member')->get();
+        return view('admin.user_logo', compact('users'));
+    }
+    public function uploadUserLogo(Request $request)
+    {
+        $user = User::find($request->user_id);
+        
+        if(isset($user))
+        {
+            if ($request->hasFile('logo')) {
+                $upload = $request->file('logo');
+                $file_type = $upload->getClientOriginalExtension();
+                $upload_name =  time() . $upload->getClientOriginalName();
+                $destinationPath = public_path('uploads/user_logo');
+                $upload->move($destinationPath, $upload_name);
+                $user->logo = 'uploads/user_logo/'.$upload_name;
+                $result = $user->save();
+                if ($result) {
+                    return redirect()->back()->with('success', 'User Logo update succesfully');
+                } else {
+                    return redirect()->back()->with('error', 'Somothing Wrong Happened');
+                }
+            }
+            else{
+                return redirect()->back()->with('error', 'Please select a logo');
+            }
+           
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'Please select A user');
+        }
+
+           
+        
+      
+    
+    }
 }

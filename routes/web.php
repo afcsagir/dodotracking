@@ -7,9 +7,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TrackingController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\OptController;
 use App\Http\Controllers\ShipperController;
 
+// Route::get('/', [AuthenticatedSessionController ::class, 'create'])->name('front page');
 Route::get('/', [TrackController::class, 'index'])->name('front page');
 Route::post('/', [TrackController::class, 'getData']);
 // Route::get('tes', [TrackController::class, 'getData']);
@@ -32,6 +34,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/tracking/import', [TrackingController::class, 'import'])->name('import tracking');
         Route::post('/tracking/update', [TrackingController::class, 'update'])->name('update order');
         Route::post('/tracking/delete', [TrackingController::class, 'delete'])->name('delete tracking');
+        Route::get('/track-page', [TrackingController::class, 'trackPage'])->name('track page');
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
@@ -46,6 +49,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('shipper/insert', [ShipperController::class, 'insert'])->name('insert shipper');
         Route::post('shipper/update', [ShipperController::class, 'update'])->name('update shipper');
         Route::post('shipper/delete', [ShipperController::class, 'delete'])->name('delete shipper');
+        Route::get('/user-logo', [AdminController::class, 'userLogo'])->name('user logo');
+        Route::post('/user-logo-update', [AdminController::class, 'uploadUserLogo'])->name('upload user logo');
     });
 
 

@@ -31,6 +31,7 @@
                 <div class="hidden sm:block sm:ml-16">
                     <div class="flex space-x-4">
                         @if (Auth()->user()->role == 'member')
+
                             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
@@ -39,6 +40,12 @@
                                 :active="request()->routeIs('manage tracking')">
                                 {{ __('Manage Tracking') }}
                             </x-nav-link>
+
+                            <x-nav-link :href="route('track page')"
+                                :active="request()->routeIs('track page')">
+                                {{ __('Tracking') }}
+                            </x-nav-link>
+
                         @endif
                         @if (Auth()->user()->role == 'admin')
                             <x-nav-link :href="route('admin dashboard')"
@@ -51,6 +58,9 @@
                             </x-nav-link>
                             <x-nav-link :href="route('manage shipper')" :active="request()->routeIs('manage shipper')">
                                 {{ __('Manage Shipper') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('user logo')" :active="request()->routeIs('user logo')">
+                                {{ __('User Logo') }}
                             </x-nav-link>
                         @endif
 

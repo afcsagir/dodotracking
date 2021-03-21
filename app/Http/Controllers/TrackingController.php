@@ -209,4 +209,9 @@ class TrackingController extends Controller
 
         return $validator;
     }
+
+    public function trackPage()
+    {
+        return view('seller.track');
+    }
 }

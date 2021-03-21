@@ -81,6 +81,16 @@ class AccountController extends Controller
         $user->phone = $request->phone;
         $user->lineid = $request->lineid;
         $user->email = $request->email;
+
+            if ($request->hasFile('logo')) {
+                $upload = $request->file('logo');
+                $file_type = $upload->getClientOriginalExtension();
+                $upload_name =  time() . $upload->getClientOriginalName();
+                $destinationPath = public_path('uploads/user_logo');
+                $upload->move($destinationPath, $upload_name);
+                $user->logo = 'uploads/user_logo/'.$upload_name;
+            }
+        
         $result = $user->save();
         if ($result) {
 
