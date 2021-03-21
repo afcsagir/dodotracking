@@ -81,14 +81,7 @@
                                             <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                                         </label>
                                     </div>
-                                    <div class="flex items-center  mt-6">
-                                        <a class="underline text-sm text-gray-600 hover:text-gray-900"
-                                            href="{{ url('forget_password') }}">
-                                            {{ __('Forget Password?') }}
-                                        </a>
-
-                                  
-                                    </div>
+                                    
                                     <div class="flex items-center justify-end mt-6">
                                         <a class="underline text-sm text-gray-600 hover:text-gray-900"
                                             href="{{ route('register') }}">
@@ -98,6 +91,15 @@
                                         <x-button color="blue" class="ml-4">
                                             {{ __('Signin') }}
                                         </x-button>
+                                    </div>
+
+                                    <div class="flex items-center  mt-3">
+                                        <a style="margin: 0 auto; font-size: 15px;" class="underline text-sm text-gray-600 hover:text-gray-900"
+                                            href="{{ url('forget_password') }}">
+                                            {{ __('Forget Password?') }}
+                                        </a>
+
+                                  
                                     </div>
                                 </form>
                             </div>

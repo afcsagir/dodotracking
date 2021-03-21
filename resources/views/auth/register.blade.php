@@ -22,6 +22,17 @@
         .col-lg-6{
             margin-bottom: 8px;
         }
+
+        .username_2nd{
+            width: 50%;
+            float: left;
+            margin-bottom: 8px;
+        }
+        .username_1st{
+            width: 50%;
+             float: left;
+             margin-bottom: 20px;
+        }
     }
 </style>
 
@@ -75,15 +86,20 @@
 
                         <div class="row" style="margin-bottom: 15px;">
 
-                         <div class="col-lg-6 col-md-6">
+                         <div class="col-lg-3 col-md-3 col-xs-6 username_1st">
 
                             <x-label for="username">User Name <font class="astrick"> *</font></x-label>
 
                             <x-input id="username" class="block  form-control w-full" type="text" name="username"
-                            :value="old('username')" placeholder="username.dodotracking.com"  required />
+                            :value="old('username')" placeholder="username"  required />
                         </div>
 
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-3 col-md-3 col-xs-6 username_2nd" style="padding-top: 25px; font-weight: bold;">
+                              <x-label for="username"> <font class="astrick"> </font></x-label>
+                            <font class="fixed_text" style="margin-left: -25px;">.dodotracking.com</font>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-xs-12">
                             <x-label for="shopname">Shop Name<font class="astrick"> *</font></x-label>
 
                             <x-input id="name" class="block mt-1 w-full" type="text" name="name"
