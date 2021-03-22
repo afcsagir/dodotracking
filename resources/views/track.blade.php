@@ -22,6 +22,9 @@
   .none {
     display: none!important;
   }
+  body{
+    overflow-x: hidden;
+  }
 </style>
 
 <body class="font-sans antialiased">

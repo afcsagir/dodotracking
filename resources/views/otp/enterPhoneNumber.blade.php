@@ -20,7 +20,7 @@
 <body class="font-sans antialiased">
     <div class="h-9/12 md:h-screen bg-gray-200">
         <main>
-            <div class="h-screen w-screen py-12 flex items-center justify-center flex-col">
+            <div class="py-12 flex items-center justify-center flex-col">
                 <div class="flex md:w-1/5 justify-center">
                     <img class="w-6/12 md:w-4/5" src="{{ asset('img/dodotracking.png') }}" alt="">
                 </div>
@@ -66,13 +66,22 @@
                                         <x-label>Enter your  Mobile Number</x-label>
                                         <x-input type="text" name="phone"></x-input>
                                     </div>
-                                    <div class="flex items-center justify-end mt-6">
+                                    <div class="flex items-center justify-end mt-6" style="margin: 0 auto;">
                                         
-                                        <x-button color="blue" class="ml-4">
+                                        <x-button color="blue" class="ml-4" style="margin: 0 auto; margin-top:20px;">
                                             {{ __('Submit') }}
                                         </x-button>
                                     </div>
                                 </form>
+
+                                <div class="flex items-center  mt-3">
+                                        <a style="margin: 0 auto; font-size: 15px;" class="underline text-sm text-gray-600 hover:text-gray-900"
+                                            href="{{ url('signin') }}">
+                                            Go to login page
+                                        </a>
+
+                                  
+                                    </div>
                             </div>
                         </div>
                     </div>

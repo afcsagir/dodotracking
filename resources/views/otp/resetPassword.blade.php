@@ -71,11 +71,20 @@
                                     </div>
                                     <div class="flex items-center justify-end mt-6">
                                         
-                                        <x-button color="blue" class="ml-4">
+                                        <x-button color="blue" class="ml-4" style="margin: 0 auto; margin-top: 20px;">
                                             {{ __('Reset Password') }}
                                         </x-button>
                                     </div>
                                 </form>
+
+                                <div class="flex items-center  mt-3">
+                                        <a style="margin: 0 auto; font-size: 15px;" class="underline text-sm text-gray-600 hover:text-gray-900"
+                                            href="{{ url('signin') }}">
+                                            Go to login page
+                                        </a>
+
+                                  
+                                    </div>
                             </div>
                         </div>
                     </div>
