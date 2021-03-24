@@ -99,4 +99,8 @@ class AccountController extends Controller
             return redirect()->back()->with('error', 'Wrong Password');
         }
     }
+
+    public function yourPackages(){
+        return view('seller.packages');
+    }
 }

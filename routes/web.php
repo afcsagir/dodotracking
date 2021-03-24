@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/user-logo-update', [AdminController::class, 'uploadUserLogo'])->name('upload user logo');
     });
 
-
+     Route::get('/your_packages', [AccountController::class, 'yourPackages'])->name('your_packages');
     Route::get('/profile', [AccountController::class, 'profile'])->name('profile');
     Route::post('/profile-update', [AccountController::class, 'profileUpdate']);
     Route::post('/change-password', [AccountController::class, 'changePassword'])->name('change password');
