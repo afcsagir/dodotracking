@@ -35,6 +35,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/tracking/update', [TrackingController::class, 'update'])->name('update order');
         Route::post('/tracking/delete', [TrackingController::class, 'delete'])->name('delete tracking');
         Route::get('/track-page', [TrackingController::class, 'trackPage'])->name('track page');
+        //package
+        Route::get('/package', [SellerController::class, 'package'])->name('package');
+        Route::get('/package/data', [SellerController::class, 'data'])->name('data package');
+        Route::post('/package/insert', [SellerController::class, 'insert'])->name('insert package');
+        Route::post('/package/update', [SellerController::class, 'update'])->name('update package');
+        Route::post('/package/delete', [SellerController::class, 'delete'])->name('delete package');
     });
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {

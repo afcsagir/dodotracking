@@ -40,7 +40,9 @@
                                 :active="request()->routeIs('manage tracking')">
                                 {{ __('Manage Tracking') }}
                             </x-nav-link>
-
+                            <x-nav-link :href="route('package')" :active="request()->routeIs('manage seller')">
+                                {{ __('Package') }}
+                            </x-nav-link>
                             <x-nav-link :href="route('track page')"
                                 :active="request()->routeIs('track page')">
                                 {{ __('Tracking') }}
