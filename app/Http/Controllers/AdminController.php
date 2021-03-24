@@ -87,7 +87,7 @@ class AdminController extends Controller
     public function insert(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'shop_id' => 'required|max:4|unique:users|alpha',
+            'package' => 'required|max:4|unique:users|alpha',
             'name' => 'required|min:4',
             'email' => 'required|email|unique:users',
             'password' => 'required'
@@ -138,23 +138,6 @@ class AdminController extends Controller
         return redirect('/admin/manage-seller')->with('success', 'Data successfully updated');
     }
 
-    public function changePassword(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'password' => 'min:8',
-        ]);
-
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-
-        User::where('id',$request->id)->update([
-            'password' => Hash::make($request->password)
-        ]);
-
-        return redirect()->back()->with('success', 'Data successfully updated');
-    }
-
     public function delete(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -183,6 +166,25 @@ class AdminController extends Controller
             'status' => 1
         ];
     }
+
+    public function changePassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'password' => 'min:8',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        User::where('id',$request->id)->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->back()->with('success', 'Data successfully updated');
+    }
+
+ 
     public function userLogo()
     {
         $users = User::where('role','member')->get();
