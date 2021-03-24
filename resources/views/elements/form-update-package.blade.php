@@ -15,14 +15,14 @@
     <x-input type="text" name="price" id="price" :value="old('price') ?? $data->price" required>
     </x-input>
 </div>
-<div class="mt-6">
+{{-- <div class="mt-6">
     <x-label>
         Details
     </x-label>
     <textarea name="details" id="details" class="border-radius border-gray-300" cols="45" rows="5">@if(isset($data->details)) {{$data->details}} @else {{old('details')}} @endif </textarea>
-    {{-- <x-input type="text" name="details" id="details" :value="old('details') ?? $data->details" >
-    </x-input> --}}
-</div>
+    <x-input type="text" name="details" id="details" :value="old('details') ?? $data->details" >
+    </x-input>
+</div> --}}
 
 <div class="mt-6">
     <x-label>

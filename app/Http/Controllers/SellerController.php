@@ -76,6 +76,9 @@ class SellerController extends Controller
 
 
             $table = Datatables::of($data)
+                ->addColumn('price', function ($row) {
+                        return '$ '.$row->price;
+                })
                 ->addColumn('package_type', function ($row) {
                     if($row->package_type == 1)
                     {
@@ -115,7 +118,7 @@ class SellerController extends Controller
             'package_type' => $request->package_type
         ]);
 
-        return redirect()->back()->with('success', 'Seller successfully created');
+        return redirect()->back()->with('success', 'Package successfully created');
     }
 
     public function update(Request $request)
@@ -143,7 +146,7 @@ class SellerController extends Controller
             return $this->changePassword($request);
         }
 
-        return redirect('/package')->with('success', 'Data successfully updated');
+        return redirect('/package')->with('success', 'Package successfully updated');
     }
 
     public function delete(Request $request)

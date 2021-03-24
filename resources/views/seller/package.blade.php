@@ -69,7 +69,7 @@
                             x-transition:enter-end="opacity-100 scale-100">
 
                             <div class="flex justify-between items-center pb-3">
-                                <p class="text-2xl font-bold">Insert Package</p>
+                                <p class="text-2xl font-bold">Add Package</p>
                                 {{-- tombol close --}}
                                 <div class="cursor-pointer z-50" id="closeModalInsert">
                                     <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18"
@@ -92,18 +92,18 @@
                                 </div>
                                 <div class="mt-6">
                                     <x-label>
-                                        price
+                                        Price
                                     </x-label>
                                     <x-input type="text" name="price" id="price" :value="old('price')" required>
                                     </x-input>
                                 </div>
-                                <div class="mt-6">
+                                {{-- <div class="mt-6">
                                     <x-label>
                                         Details
                                     </x-label>
                                     <textarea name="details" id="details" class="border-radius border-gray-300" cols="45" rows="5">{{old('details')}}</textarea>
-                                    {{-- <x-input type="text" name="details" id="details" :value="old('details')" ></x-input> --}}
-                                </div>
+                                    <x-input type="text" name="details" id="details" :value="old('details')" ></x-input>
+                                </div> --}}
 
                                 <div class="mt-6">
                                     <x-label>
@@ -167,7 +167,7 @@
                             <tr class="rounded-lg text-sm font-medium text-gray-700 text-left">
                                 <th class="px-4 py-2 border-2">Name</th>
                                 <th class="px-4 py-2 border-2">Price</th>
-                                <th class="px-4 py-2 border-2">Details</th>
+                                {{-- <th class="px-4 py-2 border-2">Details</th> --}}
                                 <th class="px-4 py-2 border-2">Max Lmit</th>
                                 <th class="px-4 py-2 border-2">Package Type</th>
                                 <th class="px-4 py-2 border-2">Manage</th>
@@ -203,10 +203,10 @@
                                 name: 'price',
                                 data: 'price'
                             },
-                            {
-                                name: 'details',
-                                data: 'details'
-                            },
+                            // {
+                            //     name: 'details',
+                            //     data: 'details'
+                            // },
                             {
                                 name: 'max_limit',
                                 data: 'max_limit'

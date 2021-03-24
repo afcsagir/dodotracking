@@ -16,7 +16,7 @@
             {{$package->package_name}}
           </div>
           <div class="card-body">
-            <h5 class="card-title">{{$package->price}}</h5>
+            <h5 class="card-title">$ {{$package->price}}</h5>
             <p class="card-text">{{$package->details}}</p>
             <p class="card-text">{{$package->max_limit}}</p>
             <p class="card-text">@if ($package->package_type == 1)
@@ -24,7 +24,7 @@
             @else
                 Monthly
             @endif</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="#" class="btn btn-primary">Buy Now</a>
           </div>
           <div class="card-footer text-muted">
             2 days ago
