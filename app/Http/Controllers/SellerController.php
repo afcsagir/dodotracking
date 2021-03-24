@@ -50,7 +50,6 @@ class SellerController extends Controller
         return view('seller.dashboard', compact(['data', 'dates', 'orders']));
     }
 
-
     public function package()
     {
         $packages = DB::table('packages')

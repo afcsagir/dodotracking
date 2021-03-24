@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ class AccountController extends Controller
         $user = Auth::user();
         return view('seller.profile', compact('user'));
     }
+
     public function changePassword(Request $request)
     {
         $input = $request->all();
@@ -45,6 +47,7 @@ class AccountController extends Controller
             }
         }
     }
+    
     public function validatePassword(array $input)
     {
 
@@ -101,6 +104,8 @@ class AccountController extends Controller
     }
 
     public function yourPackages(){
-        return view('seller.packages');
+        $packages = Package::all();
+
+        return view('seller.packages',compact('packages'));
     }
 }
