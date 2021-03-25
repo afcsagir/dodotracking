@@ -27,6 +27,11 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <style type="text/css">
+        a:hover{
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body class="font-sans antialiased overflow-x-hidden">
