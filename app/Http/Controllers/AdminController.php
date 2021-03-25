@@ -11,11 +11,15 @@ use App\Models\TrackingLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Datatables;
+use OmiseAccount;
 
 class AdminController extends Controller
 {
     public function dashboard()
     {
+        $account = OmiseAccount::retrieve();
+
+        echo $account['email']; 
         $orders = DB::table('orders')
             ->whereBetween('date', [today('Asia/Jakarta')->subDays(6), today('Asia/Jakarta')])
             ->count();

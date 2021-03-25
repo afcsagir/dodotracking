@@ -14,6 +14,7 @@ class AccountController extends Controller
 {
     public function profile()
     {
+        
         $user = Auth::user();
         return view('seller.profile', compact('user'));
     }

@@ -1,5 +1,5 @@
 <x-app-layout>
-    @section('title', 'Manage Seller')
+    @section('title', 'Tracking Log')
         <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
         <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -37,7 +37,7 @@
             }
 
         </style>
-        <x-card title="{{$user->name}}">
+        <x-card title="Total Search For - {{$user->name}}">
             <div class="mt-6">
                 @if(session('success'))
                 <x-alert-success>{{ session('success') }}</x-alert-success>
@@ -54,7 +54,7 @@
             </div>
             <div class="flex justify-between flex-col">
                 <div class="overflow-x-auto">
-                    <table class="table-auto border-collapse w-full border mt-4" id="datatable">
+                    <table class="table-auto border-collapse w-full border mt-4" id="datatable_1">
                         <thead class="border bg-green-300">
                             <tr class="rounded-lg text-sm font-medium text-gray-700 text-left">
                      
@@ -63,13 +63,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($trackingLogs as $trackingLog)
-                                <tr>
-                                    <td>{{$trackingLog->date}}</td>
-                                    <td>{{$trackingLog->total}}</td>
-                              
-                                </tr>
-                            @endforeach
+                            @if (isset($trackingLogs))
+                                @foreach ($trackingLogs as $trackingLog)
+                                    <tr>
+                                        <td>{{$trackingLog->date}}</td>
+                                        <td>{{$trackingLog->total}}</td>
+                                
+                                    </tr>
+                                @endforeach
+                            @endif
+                       
                         </tbody>
                     </table>
                 </div>
@@ -77,6 +80,11 @@
         </x-card>
 
 
-
-
-    </x-app-layout>
+    <script>
+        $(document).ready(function() {
+            datatable = $('#datatable_1').DataTable({
+                            processing: true
+                        });
+        });
+</script>
+</x-app-layout>
