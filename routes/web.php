@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/tracking/update', [TrackingController::class, 'update'])->name('update order');
         Route::post('/tracking/delete', [TrackingController::class, 'delete'])->name('delete tracking');
         Route::get('/track-page', [TrackingController::class, 'trackPage'])->name('track page');
+        //Tracking
+        Route::post('/track-id', [SellerController::class, 'TrackId'])->name('Track Id');
        
     });
 
@@ -58,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
          Route::post('/package/insert', [SellerController::class, 'insert'])->name('insert package');
          Route::post('/package/update', [SellerController::class, 'update'])->name('update package');
          Route::post('/package/delete', [SellerController::class, 'delete'])->name('delete package');
+    
     });
 
      Route::get('/your_packages', [AccountController::class, 'yourPackages'])->name('your_packages');

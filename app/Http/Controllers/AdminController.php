@@ -41,6 +41,7 @@ class AdminController extends Controller
 
         return view('seller.dashboard', compact(['data', 'dates', 'orders']));
     }
+    
     public function manageSeller()
     {
         $shippers = DB::table('shippers')
