@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\OptController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipperController;
 
 // Route::get('/', [AuthenticatedSessionController ::class, 'create'])->name('front page');
@@ -37,6 +38,12 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/track-page', [TrackingController::class, 'trackPage'])->name('track page');
         //Tracking
         Route::post('/track-id', [SellerController::class, 'TrackId'])->name('Track Id');
+        //product
+        Route::get('/product', [ProductController::class, 'product'])->name('product');
+        Route::get('/product/data', [ProductController::class, 'data'])->name('data product');
+        Route::post('/product/insert', [ProductController::class, 'insert'])->name('insert product');
+        Route::post('/product/update', [ProductController::class, 'update'])->name('update product');
+        Route::post('/product/delete', [ProductController::class, 'delete'])->name('delete product');
        
     });
 
