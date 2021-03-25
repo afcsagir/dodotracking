@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Order;
+use App\Models\TrackingLog;
 use App\Models\User;
 use Carbon\Carbon;
 use Datatables;
@@ -74,7 +75,7 @@ class AdminController extends Controller
                     return $row->created_at->format('d-m-Y H:i');
                 })
                 ->addColumn('manage', function ($row) {
-                    return '<span x-on:click=" showEditModal=true"class="modal-open bg-green-500 text-white rounded px-2 py-1 mr-4 capitalize cursor-pointer" data-id="' . $row->id . '" id="BtnUpdate">Edit</span><span class="bg-red-500 text-white rounded px-2 py-1 capitalize cursor-pointer" data-id="' . $row->id . '" id="BtnDelete">Delete</span>';
+                    return '<span x-on:click=" showEditModal=true"class="modal-open bg-green-500 text-white rounded px-2 py-1 mr-4 capitalize cursor-pointer" data-id="' . $row->id . '" id="BtnUpdate">Edit</span><span class="bg-red-500 text-white rounded px-2  mr-4 py-1 capitalize cursor-pointer" data-id="' . $row->id . '" id="BtnDelete">Delete</span><span class="bg-blue-500 text-white rounded px-2 py-1 capitalize cursor-pointer" "' . $row->id . '" id=""><a href="'. url("admin/seller/tracking-log/$row->id") .'">Tracking Log</a></span>';
                 })
                 ->addColumn('orders_total', function ($row) {
                     return count($row->orders);
@@ -225,5 +226,14 @@ class AdminController extends Controller
         
       
     
+    }
+
+    public function trackingLog($id)
+    {
+        
+        $user = User::find($id);
+        $trackingLogs = TrackingLog::where('seller_id',$id)->groupBy('date')->select('date', DB::raw('count(*) as total'))->get();
+        // dd($trackingLogs);
+       return view('admin.seller-tracking-log',compact('user','trackingLogs'));
     }
 }

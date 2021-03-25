@@ -39,7 +39,8 @@
     }
 
   </style>
-  <x-card title="Manage Tracking">
+
+<x-card title="Manage Tracking">
     <div class="mt-6">
       @if(session('success'))
                 <x-alert-success>{{ session('success') }}</x-alert-success>

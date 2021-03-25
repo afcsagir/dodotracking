@@ -187,7 +187,7 @@ class SellerController extends Controller
     //    exit;
         if(($userEndDate>$today))
         {
-            if($userLimit >= $trackinLogCount)
+            if($userLimit > $trackinLogCount)
             {
                 $orderDetails = Order::where('tracking_id',$request->track_id)->first();
 
@@ -201,9 +201,13 @@ class SellerController extends Controller
                     $trackingLog->date = $today;
                     $trackingLog->track_id = $request->track_id;
                     $trackingLog->save();
+                    exit;
                 }
             }
-            return redirect()->back()->with('danger', "Today's user Search Limit is over. Please update your plan.");
+            else{
+                return redirect()->back()->with('danger', "Today's user Search Limit is over. Please update your plan.");
+            }
+
         }
     
     //    if($userLimit>0)

@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth']], function () {
          Route::post('/package/insert', [SellerController::class, 'insert'])->name('insert package');
          Route::post('/package/update', [SellerController::class, 'update'])->name('update package');
          Route::post('/package/delete', [SellerController::class, 'delete'])->name('delete package');
+         //trackinglog
+         Route::get('seller/tracking-log/{id}', [AdminController::class, 'trackingLog'])->name('seller tracking log');
     
     });
 
