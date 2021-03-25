@@ -17,9 +17,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $account = OmiseAccount::retrieve();
 
-        echo $account['email']; 
         $orders = DB::table('orders')
             ->whereBetween('date', [today('Asia/Jakarta')->subDays(6), today('Asia/Jakarta')])
             ->count();
