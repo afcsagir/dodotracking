@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\OptController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipperController;
 
 // Route::get('/', [AuthenticatedSessionController ::class, 'create'])->name('front page');
@@ -35,6 +36,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/tracking/update', [TrackingController::class, 'update'])->name('update order');
         Route::post('/tracking/delete', [TrackingController::class, 'delete'])->name('delete tracking');
         Route::get('/track-page', [TrackingController::class, 'trackPage'])->name('track page');
+        //Tracking
+        Route::post('/track-id', [SellerController::class, 'TrackId'])->name('Track Id');
+        //product
+        Route::get('/product', [ProductController::class, 'product'])->name('product');
+        Route::get('/product/data', [ProductController::class, 'data'])->name('data product');
+        Route::post('/product/insert', [ProductController::class, 'insert'])->name('insert product');
+        Route::post('/product/update', [ProductController::class, 'update'])->name('update product');
+        Route::post('/product/delete', [ProductController::class, 'delete'])->name('delete product');
        
     });
 
@@ -58,6 +67,9 @@ Route::group(['middleware' => ['auth']], function () {
          Route::post('/package/insert', [SellerController::class, 'insert'])->name('insert package');
          Route::post('/package/update', [SellerController::class, 'update'])->name('update package');
          Route::post('/package/delete', [SellerController::class, 'delete'])->name('delete package');
+         //trackinglog
+         Route::get('seller/tracking-log/{id}', [AdminController::class, 'trackingLog'])->name('seller tracking log');
+    
     });
 
      Route::get('/your_packages', [AccountController::class, 'yourPackages'])->name('your_packages');

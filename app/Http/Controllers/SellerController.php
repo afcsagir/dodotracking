@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Package;
+use App\Models\TrackingLog;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -170,6 +172,55 @@ class SellerController extends Controller
                 'status' => 1
             ];
         }
+    }
+
+    public function TrackId(Request $request)
+    {
+       $userLimit = Auth::user()->max_limit;
+       $userStartDate = Auth::user()->package_start_date;
+       $userEndDate = Auth::user()->package_end_date;
+       $today = date('Y-m-d',strtotime('today'));
+       $trackingLogs = TrackingLog::where('seller_id',Auth::user()->id)->where('date',$today)->get();
+       $trackinLogCount = count($trackingLogs);
+    //    dump($userLimit);
+    //    dump($trackinLogCount);
+    //    exit;
+        if(($userEndDate>$today))
+        {
+            if($userLimit > $trackinLogCount)
+            {
+                $orderDetails = Order::where('tracking_id',$request->track_id)->first();
+
+                if(!isset($orderDetails) && empty($orderDetails))
+                {
+                    return redirect()->back()->with('danger', "Invalid Tracking id Or tracking id is not exist on your database."); 
+                }
+                else{
+                    $trackingLog = new TrackingLog();
+                    $trackingLog->seller_id = Auth::user()->id;
+                    $trackingLog->date = $today;
+                    $trackingLog->track_id = $request->track_id;
+                    $trackingLog->save();
+                    exit;
+                }
+            }
+            else{
+                return redirect()->back()->with('danger', "Today's user Search Limit is over. Please update your plan.");
+            }
+
+        }
+    
+    //    if($userLimit>0)
+    //    {
+    //         $orderDetails = Order::where('tracking_id',$request->track_id)->first();
+
+    //         if(!isset($orderDetails) && empty($orderDetails))
+    //         {
+    //             return redirect()->back()->with('danger', "Invalid Tracking id Or tracking id is not exist on your database."); 
+    //         }
+
+    //    }
+       return redirect()->back()->with('danger', "User Search Limit is over. Please update your plan.");
     }
 
 }

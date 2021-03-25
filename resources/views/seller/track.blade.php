@@ -9,9 +9,13 @@
         </div>
         <div class="grid grid-cols-12 pt-6 gap-3 px-6">
           <div class="col-span-12" id="cardForm">
+        
+          @if(session('danger'))
+          <x-alert-danger>{{ session('danger') }}</x-alert-danger>
+          @endif
             <div class="bg-white rounded-md w-full overflow-hidden shadow">
               <div class="p-6 rounded-lg bg-white">
-                <form method="POST" action="{{ route('front page') }}">
+                <form method="POST" action="{{ route('Track Id') }}">
                   @csrf
                   <div class="line my-4 relative">
                     @if ($errors->any())
@@ -30,7 +34,7 @@
                     <div id="error"></div>
                     <div>
                       <x-label>Tracking Id</x-label>
-                      <x-input type="text" name="shop_id" :value="old('shop_id')" required>
+                      <x-input type="text" name="track_id" :value="old('track_id')" required>
                       </x-input>
                     </div>
                     {{-- <div>
@@ -47,7 +51,7 @@
                       <x-input type="text" name="name" :value="old('name')" required></x-input>
                     </div> --}}
                     <div class="mt-6">
-                      <x-button id="track" class="w-full flex justify-center" color="blue" type="button">Submit</x-button>
+                      <x-button id="" class="w-full flex justify-center" color="blue" type="submit">Submit</x-button>
                     </div>
                   </div>
                 </form>
@@ -55,12 +59,12 @@
             </div>
           </div>
           {{-- card --}}
-        
+       
         </div>
       </div>
  
 
-  <script type="text/javascript">
+  {{-- <script type="text/javascript">
 
 
     $(document).ready(function(){
@@ -151,7 +155,7 @@
     });
   
   
-  </script>
+  </script> --}}
 
 </x-app-layout>
 
