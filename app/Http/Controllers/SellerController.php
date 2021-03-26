@@ -201,7 +201,7 @@ class SellerController extends Controller
                     $trackingLog->date = $today;
                     $trackingLog->track_id = $request->track_id;
                     $trackingLog->save();
-                    exit;
+                   return redirect()->back();
                 }
             }
             else{
