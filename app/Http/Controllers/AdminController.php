@@ -188,12 +188,12 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Data successfully updated');
     }
 
- 
     public function userLogo()
     {
         $users = User::where('role','member')->get();
         return view('admin.user_logo', compact('users'));
     }
+
     public function uploadUserLogo(Request $request)
     {
         $user = User::find($request->user_id);

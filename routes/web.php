@@ -83,4 +83,7 @@ Route::post('/reset-pass', [OptController::class, 'resetpass'])->name('reset-pas
 Route::post('/get-phone', [OptController::class, 'getPhone'])->name('get-phone');
 Route::get('/forget_password', [OptController::class, 'forgetPassword']);
 Route::get('/reset_password', [OptController::class, 'resetPassword']);
+//customer
+Route::get('/track-id-list', [CustomerController::class, 'TrackingDetails']);
+
 require __DIR__ . '/auth.php';

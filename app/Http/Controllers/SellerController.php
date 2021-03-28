@@ -182,44 +182,44 @@ class SellerController extends Controller
        $today = date('Y-m-d',strtotime('today'));
        $trackingLogs = TrackingLog::where('seller_id',Auth::user()->id)->where('date',$today)->get();
        $trackinLogCount = count($trackingLogs);
-    //    dump($userLimit);
-    //    dump($trackinLogCount);
-    //    exit;
-        if(($userEndDate>$today))
-        {
-            if($userLimit > $trackinLogCount)
+        //    dump($userLimit);
+        //    dump($trackinLogCount);
+        //    exit;
+            if(($userEndDate>$today))
             {
-                $orderDetails = Order::where('tracking_id',$request->track_id)->first();
-
-                if(!isset($orderDetails) && empty($orderDetails))
+                if($userLimit > $trackinLogCount)
                 {
-                    return redirect()->back()->with('danger', "Invalid Tracking id Or tracking id is not exist on your database."); 
+                    $orderDetails = Order::where('tracking_id',$request->track_id)->first();
+
+                    if(!isset($orderDetails) && empty($orderDetails))
+                    {
+                        return redirect()->back()->with('danger', "Invalid Tracking id Or tracking id is not exist on your database."); 
+                    }
+                    else{
+                        $trackingLog = new TrackingLog();
+                        $trackingLog->seller_id = Auth::user()->id;
+                        $trackingLog->date = $today;
+                        $trackingLog->track_id = $request->track_id;
+                        $trackingLog->save();
+                    return redirect()->back();
+                    }
                 }
                 else{
-                    $trackingLog = new TrackingLog();
-                    $trackingLog->seller_id = Auth::user()->id;
-                    $trackingLog->date = $today;
-                    $trackingLog->track_id = $request->track_id;
-                    $trackingLog->save();
-                   return redirect()->back();
+                    return redirect()->back()->with('danger', "Today's user Search Limit is over. Please update your plan.");
                 }
+
             }
-            else{
-                return redirect()->back()->with('danger', "Today's user Search Limit is over. Please update your plan.");
-            }
+        
+        //    if($userLimit>0)
+        //    {
+        //         $orderDetails = Order::where('tracking_id',$request->track_id)->first();
 
-        }
-    
-    //    if($userLimit>0)
-    //    {
-    //         $orderDetails = Order::where('tracking_id',$request->track_id)->first();
+        //         if(!isset($orderDetails) && empty($orderDetails))
+        //         {
+        //             return redirect()->back()->with('danger', "Invalid Tracking id Or tracking id is not exist on your database."); 
+        //         }
 
-    //         if(!isset($orderDetails) && empty($orderDetails))
-    //         {
-    //             return redirect()->back()->with('danger', "Invalid Tracking id Or tracking id is not exist on your database."); 
-    //         }
-
-    //    }
+        //    }
        return redirect()->back()->with('danger', "User Search Limit is over. Please update your plan.");
     }
 
