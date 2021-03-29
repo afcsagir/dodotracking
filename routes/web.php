@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\OptController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipperController;
+use App\Http\Controllers\CustomerController;
 
 // Route::get('/', [AuthenticatedSessionController ::class, 'create'])->name('front page');
 Route::get('/', [TrackController::class, 'index'])->name('front page');
@@ -85,5 +86,6 @@ Route::get('/forget_password', [OptController::class, 'forgetPassword']);
 Route::get('/reset_password', [OptController::class, 'resetPassword']);
 //customer
 Route::get('/track-id-list', [CustomerController::class, 'TrackingDetails']);
+Route::post('/track-id-req', [CustomerController::class, 'trackIdReq'])->name('track id req');
 
 require __DIR__ . '/auth.php';

@@ -104,14 +104,14 @@
         <x-input type="text" name="name" id="name" :value="old('name')" required>
         </x-input>
       </div>
-      <div class="mt-6">
+      {{-- <div class="mt-6">
         <x-label>
           Phone
         </x-label>
         <x-input type="text" name="phone" id="phone" :value="old('phone')"
         required>
       </x-input>
-    </div>
+    </div> --}}
       <div class="mt-6">
         <x-label>
           Tracking Id
@@ -230,7 +230,7 @@
           <tr class="rounded-lg text-sm font-medium text-gray-700 text-left">
             <th class="px-4 py-2 border-2">Date/Time</th>
             <th class="px-4 py-2 border-2">Name</th>
-            <th class="px-4 py-2 border-2">Phone</th>
+            {{-- <th class="px-4 py-2 border-2">Phone</th> --}}
             <th class="px-4 py-2 border-2">Tracking Id</th>
             <th class="px-4 py-2 border-2">Shipper</th>
             <th class="px-4 py-2 border-2">Input Method</th>
@@ -288,10 +288,10 @@
                         name: 'buyer',
                         data: 'buyer'
                       },
-                      {
-                        name: 'phone',
-                        data: 'phone'
-                      },
+                      // {
+                      //   name: 'phone',
+                      //   data: 'phone'
+                      // },
                       {
                         name: 'tracking_id',
                         data: 'tracking_id'

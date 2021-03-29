@@ -7,14 +7,14 @@
     <x-input type="text" name="name" id="name" :value="old('name') ?? $data->buyer" required>
     </x-input>
 </div>
-<div class="mt-6">
+{{-- <div class="mt-6">
     <x-label>
         Phone
     </x-label>
     <x-input type="text" name="phone" id="phone" :value="old('phone') ?? $data->phone"
     required>
 </x-input>
-</div>
+</div> --}}
 <div class="mt-6">
     <x-label>
         Tracking Id

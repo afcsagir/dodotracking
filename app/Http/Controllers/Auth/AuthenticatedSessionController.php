@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
 
 
             if (Auth::user()->role == 'admin') {
-                return redirect('admin/dashboard');
+                return redirect('admin/dashboard')->with('success','Welcome to dodotracking');
             }
 
             // $company_name = 'hello';
@@ -46,7 +46,7 @@ class AuthenticatedSessionController extends Controller
 
             // $url = 'http://' . $company_name . '.shaheedrafiqmkj.edu.bd/dodotracking/public/dashboard';
 
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return redirect()->intended(RouteServiceProvider::HOME)->with('success','Welcome to dodotracking');
         }
 
         Auth::logout();

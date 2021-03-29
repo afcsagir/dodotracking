@@ -1,6 +1,7 @@
 <x-app-layout>
     @section('title', 'Dashboard')
 
+    
         <x-card title="Daily Summary" md="8">
             <div class="overflow-x-auto">
                 <canvas class="h-16" id="chart" style=""></canvas>

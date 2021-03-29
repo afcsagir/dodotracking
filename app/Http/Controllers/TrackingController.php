@@ -89,7 +89,7 @@ class TrackingController extends Controller
                 'tracking_id' => $input['tracking-id'],
                 'buyer' => $input['name'],
                 'input_method' => 'manual',
-                'phone' => $input['phone'],
+                // 'phone' => $input['phone'],
                 'date' => today('Asia/Jakarta')->toDateString(),
                 'time' => now('Asia/Jakarta')->toTimeString()
             ]);
@@ -115,7 +115,7 @@ class TrackingController extends Controller
                 'shipper_id' => $input['shipper'],
                 'tracking_id' => $input['tracking-id'],
                 'buyer' => $input['name'],
-                'phone' => $input['phone'],
+                // 'phone' => $input['phone'],
             ]);
 
             return redirect()->back()->with('success', 'Data successfully updated');

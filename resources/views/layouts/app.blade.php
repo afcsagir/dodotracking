@@ -24,8 +24,12 @@
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
-        <!-- Page Content -->
         <main class="grid gap-x-8 gap-y-8 grid-cols-12 py-8 md:py-12 px-8 justify-center md:px-12 ">
+            @if(session('success')) 
+                <div class="w-full  col-span-12 md:col-span-8">
+                    <x-alert-success >{{ session('success') }}</x-alert-success>
+                </div>
+            @endif
             {{ $slot }}
         </main>
     </div>
