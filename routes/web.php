@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/seller/manage-tracking', [TrackingController::class, 'index'])->name('manage tracking');
         Route::get('/tracking/data', [TrackingController::class, 'data'])->name('data tracking');
         Route::post('/tracking/insert', [TrackingController::class, 'store'])->name('insert tracking');
-        Route::post('/tracking/import', [TrackingController::class, 'import'])->name('import tracking');
+        Route::post('/tracking/import', [TrackingController::class, 'import_new'])->name('import_tracking');
         Route::post('/tracking/update', [TrackingController::class, 'update'])->name('update order');
         Route::post('/tracking/delete', [TrackingController::class, 'delete'])->name('delete tracking');
         Route::get('/track-page', [TrackingController::class, 'trackPage'])->name('track page');

@@ -40,8 +40,17 @@
 
   </style>
 
+
+ 
+
 <x-card title="Manage Tracking">
-    <div class="mt-6">
+  @if(empty($users_packages))
+  <x-alert-danger>You have No packages purchased yet. please choose a package from here.
+    <a href="{{route('your_packages')}}" style="text-decoration: underline; font-weight: bold;">All packages</a>
+  </x-alert-danger>
+  @else
+
+   <div class="mt-6">
       @if(session('success'))
                 <x-alert-success>{{ session('success') }}</x-alert-success>
                 @endif
@@ -162,7 +171,8 @@
 </div>
 </div>
 
-<form method="POST" action="{{ route('import tracking') }}" id="form-import" enctype="multipart/form-data">
+<form method="POST" action="{{ route('import_tracking') }}" id="form-import" enctype="multipart/form-data">
+  @csrf
   <div>
     <x-label>
       File
@@ -182,7 +192,7 @@
     </x-select>
   </div>
   <div class="flex justify-end mt-4">
-    <x-button color="blue" type="button" id="BtnImportSubmit">Save</x-button>
+    <x-button color="blue" type="submit" id="BtnImportSubmit">Save</x-button>
   </div>
 </form>
 </div>
@@ -243,6 +253,10 @@
   </div>
 
 </form>
+  @endif
+
+
+   
 
 </x-card>
 

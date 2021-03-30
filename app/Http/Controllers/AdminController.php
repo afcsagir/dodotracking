@@ -91,7 +91,7 @@ class AdminController extends Controller
     public function insert(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'package' => 'required|max:4|unique:users|alpha',
+            //'package' => 'required|max:4|unique:users|alpha',
             'name' => 'required|min:4',
             'email' => 'required|email|unique:users',
             'password' => 'required'
@@ -102,9 +102,10 @@ class AdminController extends Controller
         }
 
         User::create([
-            'phone' => $request->phone,
-            'shop_id' => $request->shop_id,
-            'name' => $request->name,
+            //'phone' => $request->phone,
+            //'shop_id' => $request->shop_id,
+            'name' => $request->shop_id,
+            'username' => $request->name,
             'email' => $request->email,
             'role' => 'member',
             'password' => Hash::make($request->password),

@@ -16,7 +16,9 @@ class TrackingController extends Controller
     {
         $shippers = DB::table('shippers')
         ->get();
-        return view('seller.manage-tracking', compact('shippers'));
+
+        $users_packages = Auth()->user()->package_id;
+        return view('seller.manage-tracking', compact('shippers', 'users_packages'));
     }
 
     public function data(Request $request)
@@ -147,8 +149,10 @@ class TrackingController extends Controller
         }
     }
 
-    public function import(Request $request)
+    public function import_new(Request $request)
     {
+       
+
         $input = $request->all();
 
         // $validator = Validator::make($input, [

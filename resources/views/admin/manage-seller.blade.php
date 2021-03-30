@@ -85,7 +85,7 @@
                                 @csrf
                                 <div>
                                     <x-label>
-                                        Shop ID
+                                        Shop Name
                                     </x-label>
                                     <x-input type="text" name="shop_id" id="shop_id" :value="old('shop_id')" required>
                                     </x-input>
@@ -154,7 +154,7 @@
                         <thead class="border bg-green-300">
                             <tr class="rounded-lg text-sm font-medium text-gray-700 text-left">
                                 <th class="px-4 py-2 border-2">Registered at</th>
-                                <th class="px-4 py-2 border-2">Shop Id</th>
+                                <!-- <th class="px-4 py-2 border-2">Shop Id</th> -->
                                 <th class="px-4 py-2 border-2">Name</th>
                                 <th class="px-4 py-2 border-2">Email</th>
                                 <th class="px-4 py-2 border-2">Total Orders</th>
@@ -187,10 +187,10 @@
                                 name: 'Registerd at',
                                 data: 'created_at'
                             },
-                            {
-                                name: 'shop_id',
-                                data: 'shop_id'
-                            },
+                            // {
+                            //     name: 'shop_id',
+                            //     data: 'shop_id'
+                            // },
                             {
                                 name: 'name',
                                 data: 'name'

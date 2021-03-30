@@ -30,21 +30,21 @@
     }
 
     @media screen and (max-width: 600px) {
-  .pricing_title{
-    margin-top: 60px;
-  }
+      .pricing_title{
+        margin-top: 60px;
+      }
 
-  
-}
 
-.card-header h2{
-    font-size: 22px;
-    font-weight: bold !important;
-  }
+    }
 
-  .lead{
-    font-size: 18px;
-  }
+    .card-header h2{
+      font-size: 22px;
+      font-weight: bold !important;
+    }
+
+    .lead{
+      font-size: 18px;
+    }
   </style>
 </head>
 
@@ -63,59 +63,70 @@
 
     <div class="container">
 
-      <div style="padding-top: 20%">
-        <div class="row ">
-          <div class="col-4"></div>
-              <div class="flex md:w-1/5 justify-center ">
-                @if (session()->has('userLogo'))
-                <img class="w-6/12 md:w-4/5" src="{{ asset(session()->get('userLogo')) }}  " alt="">
-               @else
-               <img class="w-6/12 md:w-4/5" src="@if(isset($userLogo)) {{ asset($userLogo) }} @else {{ asset('img/dodotracking.png') }} @endif " alt="">
-                @endif
-     
-              </div>
-        </div>
 
-        <div class="row pt-5">
-          <div class="col-4"></div>
+      <div class="row" style="padding-top: 4%;">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+          <div class="flex justify-center" style="width: 70%; margin: 0 auto; padding-bottom: 4%;">
+            @if (session()->has('userLogo'))
+            <img src="{{ asset(session()->get('userLogo')) }}  " alt="">
+            @else
+            <img src="@if(isset($userLogo)) {{ asset($userLogo) }} @else {{ asset('img/dodotracking.png') }} @endif " alt="">
+            @endif
+
+          </div>
+
+          <div class="form-group text-center" style="padding-top: 2%; padding-bottom: 2%; font-size: 18px;">
+            You can check your tracking No by enterning order date and  name from here.
+          </div>
+
           <div class="card">
             <div class="card-body">
               @if(session()->has('error'))
               <div class="alert alert-danger mb-3 background-danger" role="alert">
-                  {{ session()->get('error') }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
+                {{ session()->get('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
               </div>
               @endif
               <form method="POST" action="{{route('track id req')}}" id="form-import" enctype="multipart/form-data">
                 @csrf
-                    @if (isset($seller))
-                      <input type="hidden" name="seller_id" value={{$seller->id}}>
-                    @endif
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Date</label>
-                    <input type="date" name='date' class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1" id="exampleInputPassword1" placeholder="Date" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
-                    <input type="text" name='name' class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" required>
-                  </div>
+                @if (isset($seller))
+                <input type="hidden" name="seller_id" value={{$seller->id}}>
+                @endif
+
+                <div class="form-group">
+                  <label for="exampleInputPassword1"><strong>Order Date</strong></label>
+                  <input type="date" name='date' class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1" id="exampleInputPassword1" placeholder="Date" required value="{{old('date')}}">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1"><strong>Full Name</strong></label>
+                  <input type="text" name='name' class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 mt-1" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" required value="{{old('name')}}">
+                </div>
                 <div class="text-right">
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </div> 
               </form>
+            </div>
           </div>
         </div>
+
+        <div class="col-lg-4"></div>
+
       </div>
 
-      <div class="pb-5">
-        @if (session()->has('data'))    
-        <div class="card mt-5 ">
-          <div class="card-header">
-            <h4>Tracking Id List</h4>
-          </div>
-          <div class="card-body">
+
+      <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+         <div class="pb-5">
+          @if (session()->has('data'))    
+         <!--  <div class="card mt-5 ">
+            <div class="card-header">
+              <h4><strong>Your Tracking  List</strong></h4>
+            </div>
+            <div class="card-body">
             <table id="table_id" class="display">
               <thead>
                   <tr>
@@ -136,19 +147,63 @@
                   @endforeach
               </tbody>
             </table>
+
+
+
+
+
           </div>
-        </div>
+        </div> -->
+
+         <h4 style="padding-top: 5%; padding-bottom: 2%;"><strong>Your Tracking  List</strong></h4>
+
+        <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Tracking Number</th>
+                  <th>Shipper</th>
+                </tr>
+              </thead>
+              <tbody>
+                @if(count(session()->get('data')) > 0)
+                  @foreach (session()->get('data') as $item)    
+                    <tr>
+                        <td>{{$item->date}}</td>
+                        <td>{{$item->buyer}}</td>
+                        <td>{{$item->tracking_id}}</td>
+                        <td>@if (isset($item->shipper)) {{$item->shipper->name}} @endif</td>
+                    </tr>
+                  @endforeach    
+                  @else
+                  <tr>
+                    <td style="text-align: center;" colspan="4">No data Found</td>
+                  </tr>
+                  @endif      
+              </tbody>
+            </table>
         @endif
       </div>
     </div>
-
+    <div class="col-lg-2"></div>
 
   </div>
-  <script>
-    $(document).ready( function () {
+
+
+
+
+</div>
+
+<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    Powered By
+    <a class="text-dark" href="https://dodotracking.com/">Dodotracking.com</a>
+  </div>
+<script>
+  $(document).ready( function () {
     $('#table_id').DataTable();
-} );
-  </script>
+  } );
+</script>
 </body>
 
 </html>

@@ -50,10 +50,10 @@
                                 {{ __('Product') }}
                             </x-nav-link> --}}
                            
-                            <x-nav-link :href="route('track page')"
+                           <!--  <x-nav-link :href="route('track page')"
                                 :active="request()->routeIs('track page')">
                                 {{ __('Tracking') }}
-                            </x-nav-link>
+                            </x-nav-link> -->
 
                         @endif
                         @if (Auth()->user()->role == 'admin')
