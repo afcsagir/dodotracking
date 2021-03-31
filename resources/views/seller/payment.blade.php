@@ -42,6 +42,15 @@
   .lead{
     font-size: 18px;
   }
+  .omise-checkout-button{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+  }
   </style>
 </head>
 
@@ -206,7 +215,7 @@ out</a>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
      <h1 class="pricing_title" style="font-size: 35px; font-weight: bold;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-      Pricing List
+      Payment
   
   
 </font></font></h1>
@@ -218,36 +227,46 @@ out</a>
   </div>
     <div class="card-deck mb-3 text-center">
 
-      @foreach ($packages as $package)
+    
 
-      <div class="card mb-4 shadow-sm col-xs-12">
-      <div class="card-header">
-        <h2 class="my-0 font-weight-normal">
-          {{$package->package_name}}
-        </h2>
+      <div class="card mb-4 shadow-sm ">
+        <div class="card-header">
+          <h2 class="my-0 font-weight-normal">
+            {{$package->package_name}}
+          </h2>
+        </div>
+
+        <div class="card-body">
+          <h2 class="pricing-card-title" style="font-size: 28px;">
+            ${{$package->price}} <small class='text-muted'>/ @if ($package->package_type == 1)
+            Daily
+            @else
+            Monthly
+          @endif</small>
+          </h2>
+
+
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Total Tracking - {{$package->max_limit}}</li>
+          
+          </ul>
+          <form id="checkoutForm" method="POST" action="{{ route('package payment') }}" id="form-insert" enctype="multipart/form-data">
+            <input type="hidden" name="package_id" value={{$package->id}}>
+            <input type="hidden" name="package_price" value={{$package->price}}>
+            @csrf
+            <script type="text/javascript" src="https://cdn.omise.co/omise.js"
+                    data-key="pkey_test_5napb06l501v08zuy8t"
+                    data-image={{ asset('img/dodotracking.png') }}
+                    data-amount="{{$package->price*100}}"
+                    data-currency="USD"
+                    data-default-payment-method="credit_card">
+            </script>
+          </form>
+        </div>
+
+
       </div>
 
-      <div class="card-body">
-        <h2 class="pricing-card-title" style="font-size: 28px;">
-          ${{$package->price}} <small class='text-muted'>/ @if ($package->package_type == 1)
-          Daily
-          @else
-          Monthly
-        @endif</small>
-        </h2>
-
-
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Total Tracking - {{$package->max_limit}}</li>
-         
-        </ul>
-        <a href="{{url('/payment/'.$package->id)}}"> <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button></a>
-       
-      </div>
-
-
-    </div>
- @endforeach
 
   </div>
 

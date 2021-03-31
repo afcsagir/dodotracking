@@ -42,6 +42,15 @@
   .lead{
     font-size: 18px;
   }
+  .omise-checkout-button{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    border-radius: .3rem;
+  }
   </style>
 </head>
 
@@ -202,59 +211,17 @@ out</a>
 </div>
 </nav>
 
-<div class="container">
+  <div class="container">
 
-  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-     <h1 class="pricing_title" style="font-size: 35px; font-weight: bold;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-      Pricing List
-  
-  
-</font></font></h1>
- 
+    @if(session('success'))
+      <x-alert-success>{{ session('success') }}</x-alert-success>
+    @endif
+    @if(session('failed'))
+      <x-alert-danger>{{ session('failed') }}</x-alert-danger>
+    @endif
 
-    <p class="lead" style="margin-top: 10px; margin-bottom: 25px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-      From Our Pricing plan, you can choose any of them
-    </font></font></p>
-  </div>
-    <div class="card-deck mb-3 text-center">
-
-      @foreach ($packages as $package)
-
-      <div class="card mb-4 shadow-sm col-xs-12">
-      <div class="card-header">
-        <h2 class="my-0 font-weight-normal">
-          {{$package->package_name}}
-        </h2>
-      </div>
-
-      <div class="card-body">
-        <h2 class="pricing-card-title" style="font-size: 28px;">
-          ${{$package->price}} <small class='text-muted'>/ @if ($package->package_type == 1)
-          Daily
-          @else
-          Monthly
-        @endif</small>
-        </h2>
-
-
-        <ul class="list-unstyled mt-3 mb-4">
-          <li>Total Tracking - {{$package->max_limit}}</li>
-         
-        </ul>
-        <a href="{{url('/payment/'.$package->id)}}"> <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button></a>
-       
-      </div>
-
-
-    </div>
- @endforeach
 
   </div>
-
-</div>
-
-
-</div>
 </body>
 
 </html>

@@ -48,8 +48,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/product/delete', [ProductController::class, 'delete'])->name('delete product');
 
         //payment
-
+        Route::get('/payment/{id}', [PaymentController::class, 'payment'])->name('payment');
         Route::post('/payment/package', [PaymentController::class, 'packagePayment'])->name('package payment');
+        Route::get('/payment-success', [PaymentController::class, 'paymentSccuess'])->name('payment success');
        
     });
 
