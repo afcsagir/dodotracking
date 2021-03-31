@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\BulkImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -9,6 +10,8 @@ use App\Models\Order;
 use Carbon\Carbon;
 use Datatables;
 use Auth;
+use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrackingController extends Controller
 {
@@ -154,6 +157,11 @@ class TrackingController extends Controller
        
 
         $input = $request->all();
+        Session::put('shipper_id', $request->shipper); 
+        if ($request->hasFile('file')) {
+           $result =  Excel::import(new BulkImport,request()->file('file'));
+          }
+          Session::forget('shipper_id'); 
 
         // $validator = Validator::make($input, [
         //     'name' => 'required|string',
@@ -166,29 +174,33 @@ class TrackingController extends Controller
         //     // 'exists' => "Youre choose wrong shipper"
         // ]);
 
-        if (false) {
-            // return error here
-            // return response()->json($validator, 419);
-        } else {
+        // if (false) {
+        //     // return error here
+        //     return response()->json($validator, 419);
+        // } else {
 
-            foreach ($request->data[0] as $data) {
+        //     foreach ($request->data[0] as $data) {
 
-                DB::table('orders')->insert([
-                    'shipper_id' => $request->shipper,
-                    'shop_id' => Auth()->user()->shop_id,
-                    'tracking_id' => $data['trackingId'],
-                    'buyer' => $data['name'],
-                    'phone' => $data['phone'],
-                    'input_method' => 'import',
-                    'date' => today('Asia/Jakarta')->toDateString(),
-                    'time' => now('Asia/Jakarta')->toTimeString()
-                ]);
-            }
+        //         DB::table('orders')->insert([
+        //             'shipper_id' => $request->shipper,
+        //             'shop_id' => Auth()->user()->shop_id,
+        //             'tracking_id' => $data['trackingId'],
+        //             'buyer' => $data['name'],
+        //             'phone' => $data['phone'],
+        //             'input_method' => 'import',
+        //             'date' => today('Asia/Jakarta')->toDateString(),
+        //             'time' => now('Asia/Jakarta')->toTimeString()
+        //         ]);
+        //     }
+        // }
+
+        // return response()->json([
+        //     'status' => 1
+        // ], 200);
+
+        if($result){
+            return redirect()->back()->with('success', 'Data successfully Uploaded');
         }
-
-        return response()->json([
-            'status' => 1
-        ], 200);
     }
 
     public function validateInput(array $input)

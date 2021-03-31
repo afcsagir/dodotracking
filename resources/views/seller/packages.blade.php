@@ -203,7 +203,15 @@ out</a>
 </nav>
 
 <div class="container">
-
+  <form id="checkoutForm" method="POST" action="{{ route('package payment') }}" id="form-insert" enctype="multipart/form-data">
+    @csrf
+    <script type="text/javascript" src="https://cdn.omise.co/omise.js"
+            data-key="pkey_test_5napb06l501v08zuy8t"
+            data-amount="12345"
+            data-currency="THB"
+            data-default-payment-method="credit_card">
+    </script>
+  </form>
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
      <h1 class="pricing_title" style="font-size: 35px; font-weight: bold;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
       Pricing List

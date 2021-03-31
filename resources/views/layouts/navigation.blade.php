@@ -68,7 +68,7 @@
                             <x-nav-link :href="route('manage shipper')" :active="request()->routeIs('manage shipper')">
                                 {{ __('Manage Shipper') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('package')" :active="request()->routeIs('manage seller')">
+                            <x-nav-link :href="route('package')" :active="request()->routeIs('package')">
                                 {{ __('Package') }}
                             </x-nav-link>
                             <x-nav-link :href="route('user logo')" :active="request()->routeIs('user logo')">

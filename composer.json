@@ -15,11 +15,11 @@
         "laravel/breeze": "^1.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "maatwebsite/excel": "^3.1",
         "omise/omise-php": "^2.12",
         "tzsk/otp": "^5.1",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
-
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -52,7 +52,8 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/helper/sms.php"
+            "app/helper/sms.php",
+            "app/import/BulkImport.php"
         ]
     },
     "minimum-stability": "dev",

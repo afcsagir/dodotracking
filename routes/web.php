@@ -12,6 +12,7 @@ use App\Http\Controllers\OptController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShipperController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PaymentController;
 
 // Route::get('/', [AuthenticatedSessionController ::class, 'create'])->name('front page');
 Route::get('/', [TrackController::class, 'index'])->name('front page');
@@ -45,6 +46,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('/product/insert', [ProductController::class, 'insert'])->name('insert product');
         Route::post('/product/update', [ProductController::class, 'update'])->name('update product');
         Route::post('/product/delete', [ProductController::class, 'delete'])->name('delete product');
+
+        //payment
+
+        Route::post('/payment/package', [PaymentController::class, 'packagePayment'])->name('package payment');
        
     });
 
