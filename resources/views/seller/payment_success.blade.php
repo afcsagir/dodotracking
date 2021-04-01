@@ -27,30 +27,30 @@
     }
 
     @media screen and (max-width: 600px) {
-  .pricing_title{
-    margin-top: 60px;
-  }
+      .pricing_title{
+        margin-top: 60px;
+      }
 
-  
-}
 
-.card-header h2{
-    font-size: 22px;
-    font-weight: bold !important;
-  }
+    }
 
-  .lead{
-    font-size: 18px;
-  }
-  .omise-checkout-button{
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-    padding: .5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .3rem;
-  }
+    .card-header h2{
+      font-size: 22px;
+      font-weight: bold !important;
+    }
+
+    .lead{
+      font-size: 18px;
+    }
+    .omise-checkout-button{
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+      padding: .5rem 1rem;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      border-radius: .3rem;
+    }
   </style>
 </head>
 
@@ -211,23 +211,63 @@ out</a>
 </div>
 </nav>
 
-  <div class="container">
+<div class="container">
+  <style type="text/css">
+   h1 {
+    color: #88B04B;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #404F5E;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-size:20px;
+    margin: 0;
+  }
+  i {
+    color: #9ABC66;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left:-15px;
+  }
+  .card {
+    background: white;
+    padding: 60px;
+    border-radius: 4px;
+    box-shadow: 0 2px 3px #C8D0D8;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+  }
+</style>
 
-      <div class="col-lg-12 mt-4">
-    <div class="alert alert-success alert-dismissible fade show btn-block">
-    Your payment successfully received. Now You can add tracking as per your package. Go to Manage tracking Page from <a href="{{route('manage tracking')}}">Here</a>
+<div class="row" style="margin-top: 25px;">
+  <div class="col-lg-3"></div>
+  <div class="col-lg-6">
+    <div class="card">
+      <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+        <i class="checkmark">✓</i>
+      </div>
+      <h1>Success</h1> 
+      <p>Your payment successfully received. Now You can add tracking as per your package. Go to Manage tracking Page from <a style="text-decoration: underline; font-weight: bold;" href="{{route('manage tracking')}}">Here</a></p>
     </div>
   </div>
+  <div class="col-lg-3"></div>
+</div>
+
+
 
   <!--   @if(session('success'))
       <x-alert-success>{{ session('success') }}</x-alert-success>
     @endif
     @if(session('failed'))
       <x-alert-danger>{{ session('failed') }}</x-alert-danger>
-    @endif -->
+      @endif -->
 
 
-  </div>
-</body>
+    </div>
+  </body>
 
-</html>
+  </html>
