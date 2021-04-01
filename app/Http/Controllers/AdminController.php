@@ -15,6 +15,7 @@ use OmiseAccount;
 
 class AdminController extends Controller
 {
+    
     public function dashboard()
     {
 

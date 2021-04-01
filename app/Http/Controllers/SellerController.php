@@ -146,7 +146,7 @@ class SellerController extends Controller
             return $this->changePassword($request);
         }
 
-        return redirect('/package')->with('success', 'Package successfully updated');
+        return redirect('/admin/package')->with('success', 'Package successfully updated');
     }
 
     public function delete(Request $request)
