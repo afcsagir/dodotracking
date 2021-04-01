@@ -45,6 +45,12 @@
     .lead{
       font-size: 18px;
     }
+    /*.footer_asif{
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+      font-size: 16px;
+    }*/
   </style>
 </head>
 
@@ -159,7 +165,7 @@
 
         <table class="table">
               <thead class="thead-light">
-                <tr>
+                <tr style="background-color: #F7941E; color: #FFFFFF;">
                   <th>Date</th>
                   <th>Name</th>
                   <th>Tracking Number</th>
@@ -170,7 +176,7 @@
                 @if(count(session()->get('data')) > 0)
                   @foreach (session()->get('data') as $item)    
                     <tr>
-                        <td>{{$item->date}}</td>
+                        <td>{{date('d-M-Y', strtotime($item->date))}}</td>
                         <td>{{$item->buyer}}</td>
                         <td>{{$item->tracking_id}}</td>
                         <td>@if (isset($item->shipper)) {{$item->shipper->name}} @endif</td>
@@ -195,7 +201,7 @@
 
 </div>
 
-<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+<div class="text-center p-3 footer_asif" style="background-color: rgba(0, 0, 0, 0.2);">
     Powered By
     <a class="text-dark" href="https://dodotracking.com/">Dodotracking.com</a>
   </div>

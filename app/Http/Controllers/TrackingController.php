@@ -20,8 +20,27 @@ class TrackingController extends Controller
         $shippers = DB::table('shippers')
         ->get();
 
+        $today_date = date('Y-m-d');
+
+        $total_tracking_orders = DB::table('orders')
+          ->where('orders.seller_id', Auth::user()->id)
+          ->whereDate('orders.date', $today_date)
+          ->get();
+
+          $this_users_limit = '';
+
+         
+
+          if(!empty(Auth::user()->package_id)){
+              $this_users_limit = DB::table('packages')
+                  ->where('packages.id', Auth::user()->package_id)
+                  ->first();
+          }
+
+      
+
         $users_packages = Auth()->user()->package_id;
-        return view('seller.manage-tracking', compact('shippers', 'users_packages'));
+        return view('seller.manage-tracking', compact('shippers', 'users_packages', 'total_tracking_orders', 'this_users_limit'));
     }
 
     public function data(Request $request)
@@ -51,6 +70,7 @@ class TrackingController extends Controller
                 join('shippers', 'orders.shipper_id', 'shippers.id')
                 ->select('orders.*', 'shippers.name as shipper')
                 ->where('shop_id', Auth::user()->shop_id)
+                ->where('seller_id', Auth::user()->id)
                 ->where('date', $request->date)
                 ->orderBy('id', 'desc')
                 ->get();
@@ -60,6 +80,7 @@ class TrackingController extends Controller
                 join('shippers', 'orders.shipper_id', 'shippers.id')
                 ->select('orders.*', 'shippers.name as shipper')
                 ->where('shop_id', Auth::user()->shop_id)
+                ->where('seller_id', Auth::user()->id)
                 ->where('date', today('Asia/Jakarta')->toDateString())
                 ->orderBy('id', 'desc')
                 ->get();
@@ -82,15 +103,33 @@ class TrackingController extends Controller
     {
         $input = $request->all();
 
+
         $validator = $this->validateInput($input);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            DB::table('orders')
+
+        $today_date = date('Y-m-d');
+
+        $total_tracking_orders = DB::table('orders')
+          ->where('orders.seller_id', Auth::user()->id)
+          ->whereDate('orders.date', $today_date)
+          ->get();
+
+          
+
+          if(!empty(Auth::user()->package_id)){
+              $this_users_limit = DB::table('packages')
+                  ->where('packages.id', Auth::user()->package_id)
+                  ->first();
+
+            if(count($total_tracking_orders) <  $this_users_limit->max_limit){
+                 DB::table('orders')
             ->insert([
                 'shipper_id' => $input['shipper'],
-                'shop_id' => Auth()->user()->shop_id,
+                'seller_id' => Auth::user()->id,
+                // 'shop_id' => Auth()->user()->shop_id,
                 'tracking_id' => $input['tracking-id'],
                 'buyer' => $input['name'],
                 'input_method' => 'manual',
@@ -100,6 +139,16 @@ class TrackingController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Data successfully created');
+            }
+
+            else{
+                return redirect()->back()->with('danger', 'Your Todays Limit is Over');
+            }
+
+           
+          }
+
+            
         }
     }
     public function update(Request $request)

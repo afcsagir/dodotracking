@@ -105,8 +105,20 @@ class AccountController extends Controller
     }
 
     public function yourPackages(){
-        $packages = Package::all();
+        $users_packages = Auth()->user()->package_id;
 
-        return view('seller.packages',compact('packages'));
+        $recent_active_packages = '';
+        if(!empty($users_packages)){
+            // $recent_active_packages = DB::table('packages')
+            //     ->select('packages.*')
+            //     ->where('packages.id', $users_packages)
+            //     ->first();
+            $recent_active_packages = Package::where('id', $users_packages)->first();
+            
+        }
+        
+       
+        $packages = Package::all();
+        return view('seller.packages',compact('packages', 'recent_active_packages'));
     }
 }

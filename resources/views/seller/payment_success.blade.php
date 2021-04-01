@@ -213,12 +213,18 @@ out</a>
 
   <div class="container">
 
-    @if(session('success'))
+      <div class="col-lg-12 mt-4">
+    <div class="alert alert-success alert-dismissible fade show btn-block">
+    Your payment successfully received. Now You can add tracking as per your package. Go to Manage tracking Page from <a href="{{route('manage tracking')}}">Here</a>
+    </div>
+  </div>
+
+  <!--   @if(session('success'))
       <x-alert-success>{{ session('success') }}</x-alert-success>
     @endif
     @if(session('failed'))
       <x-alert-danger>{{ session('failed') }}</x-alert-danger>
-    @endif
+    @endif -->
 
 
   </div>

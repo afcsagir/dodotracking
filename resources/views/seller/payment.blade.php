@@ -214,21 +214,22 @@ out</a>
 <div class="container">
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-     <h1 class="pricing_title" style="font-size: 35px; font-weight: bold;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-      Payment
+     <h1 class="pricing_title" style="font-size: 25px; font-weight: bold;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+      Are You Sure, You want to Buy this package ?
   
   
 </font></font></h1>
  
 
-    <p class="lead" style="margin-top: 10px; margin-bottom: 25px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+    <!-- <p class="lead" style="margin-top: 10px; margin-bottom: 25px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
       From Our Pricing plan, you can choose any of them
-    </font></font></p>
+    </font></font></p> -->
   </div>
     <div class="card-deck mb-3 text-center">
 
     
-
+<div class="col-lg-4"></div>
+<div class="col-lg-4">
       <div class="card mb-4 shadow-sm ">
         <div class="card-header">
           <h2 class="my-0 font-weight-normal">
@@ -266,7 +267,8 @@ out</a>
 
 
       </div>
-
+</div>
+<div class="col-lg-4"></div>
 
   </div>
 

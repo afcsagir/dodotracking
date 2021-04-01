@@ -1,4 +1,6 @@
+
 <x-app-layout>
+
   @section('title', 'Manage Tracking')
   <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
@@ -8,8 +10,22 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.2/xlsx.full.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<!--   only bootstrap -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 
   <style>
+     a:hover{
+      text-decoration: none;
+    }
+
     [x-cloak] {
       display: none;
     }
@@ -37,20 +53,61 @@
     .modal-hide {
       display: none !important;
     }
+    .tracking_table{
+      text-align: center;
+    }
 
-  </style>
+    .btns {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.btns_limit{
+    background-color: #10B880;
+  border: none;
+  color: white;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Darker background on mouse-over */
+.btns:hover {
+  background-color: RoyalBlue;
+}
+ </style>
+
+<?php 
+$max_limits  = '';
+if(!empty(Auth::user()->package_id)){
+         $max_limits = $this_users_limit->max_limit;
+          }  
+          
+          
+?>
 
 
- 
+<x-card title="Manage Tracking 
 
-<x-card title="Manage Tracking">
+(Used - {{count($total_tracking_orders)}} , Max Limit- {{$max_limits}})">
+
   @if(empty($users_packages))
   <x-alert-danger>You have No packages purchased yet. please choose a package from here.
     <a href="{{route('your_packages')}}" style="text-decoration: underline; font-weight: bold;">All packages</a>
   </x-alert-danger>
   @else
 
-   <div class="mt-6">
+
+   <div class="mt-4">
+     @if(session('danger'))
+      <x-alert-danger>{{ session('danger') }}</x-alert-danger>
+      @endif
       @if(session('success'))
                 <x-alert-success>{{ session('success') }}</x-alert-success>
                 @endif
@@ -63,21 +120,31 @@
         </ul>
     </x-alert-danger>
       @endif
-      <x-button color="green" id="BtnInsert">
+
+      <button style="margin-top: -15px;" class="btns" id="BtnInsert"><i class="fa fa-plus"></i> Add</button>
+
+      <button class="btns" id="BtnImport"><i class="fa fa-upload"></i> Import</button>
+
+      
+
+      <button style="float: right;" class="btns_limit" style="background-color: #00c851 !important;">Limit - {{$max_limits}} (Per Day)</button>
+
+
+      <!-- <x-button color="green" id="BtnInsert">
         <p class="mr-1">Add</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px">
           <path d="M0 0h24v24H0z" fill="none" />
           <path
           d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
         </svg>
-      </x-button>
-      <x-button color="green" id="BtnImport">
+      </x-button> -->
+   <!--    <x-button color="green" id="BtnImport">
         <p class="mr-1">Import</p>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px">
           <path d="M0 0h24v24H0z" fill="none" />
           <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
         </svg>
-      </x-button>
+      </x-button> -->
       <div class="my-4">
         <x-input type="date" name="input-date" id="inputDate">
         </x-input>
@@ -92,7 +159,7 @@
         x-transition:enter-end="opacity-100 scale-100">
 
         <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl font-bold">Insert Tracking</p>
+          <p class="text-2xl font-bold">Add Tracking</p>
           {{-- tombol close --}}
           <div class="cursor-pointer z-50" id="closeModalInsert">
             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18"
@@ -121,7 +188,7 @@
         required>
       </x-input>
     </div> --}}
-      <div class="mt-6">
+      <div class="mt-4">
         <x-label>
           Tracking Id
         </x-label>
@@ -129,7 +196,7 @@
         required>
       </x-input>
     </div>
-    <div class="mt-6">
+    <div class="mt-4">
       <x-label>
         Shipper
       </x-label>
@@ -235,16 +302,16 @@
 <form action="#">
   <div class="flex justify-between flex-col">
     <div class="overflow-x-auto">
-      <table class="table-auto border-collapse w-full border mt-4" id="datatable">
-        <thead class="border bg-green-300">
+      <table class="table-auto border-collapse w-full border mt-4" id="datatable" style="text-align: center;">
+        <thead class="border bg-green-300" style="text-align: center;">
           <tr class="rounded-lg text-sm font-medium text-gray-700 text-left">
-            <th class="px-4 py-2 border-2">Date/Time</th>
-            <th class="px-4 py-2 border-2">Name</th>
+            <th class="px-4 py-2 border-2 tracking_table">Date/Time</th>
+            <th class="px-4 py-2 border-2 tracking_table">Name</th>
             {{-- <th class="px-4 py-2 border-2">Phone</th> --}}
-            <th class="px-4 py-2 border-2">Tracking Id</th>
-            <th class="px-4 py-2 border-2">Shipper</th>
-            <th class="px-4 py-2 border-2">Input Method</th>
-            <th class="px-4 py-2 border-2">Manage</th>
+            <th class="px-4 py-2 border-2 tracking_table">Tracking Id</th>
+            <th class="px-4 py-2 border-2 tracking_table">Shipper</th>
+            <th class="px-4 py-2 border-2 tracking_table">Input Method</th>
+            <th class="px-4 py-2 border-2 tracking_table">Manage</th>
           </tr>
         </thead>
       </table>
@@ -254,10 +321,6 @@
 
 </form>
   @endif
-
-
-   
-
 </x-card>
 
 

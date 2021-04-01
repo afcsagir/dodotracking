@@ -13,9 +13,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+
+
 
   <!-- Styles -->
   <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -28,7 +32,7 @@
 
     @media screen and (max-width: 600px) {
   .pricing_title{
-    margin-top: 60px;
+    margin-top: 30px;
   }
 
   
@@ -204,12 +208,36 @@ out</a>
 
 <div class="container">
 
+   <?php
+       $users_packages = Auth()->user()->package_id; 
+      ?>
+    @if(empty($users_packages))
+ <!--  <div class="col-lg-12 mt-4">
+    <div class="alert alert-danger alert-dismissible fade show btn-block">
+    You have No packages purchased yet. please choose a package from here.
+    </div>
+  </div> -->
+  @else
+
+  <div class="col-lg-12 mt-4">
+    <div class="alert alert-success alert-dismissible fade show btn-block">
+    <h4 class="alert-heading" style="font-size: 22px; font-weight: bold;"><i class="fa fa-life-ring" style="font-size: 25px; margin-right: 10px;"></i> Your Current package : {{$recent_active_packages['package_name']}}
+     </h4>
+    <p style="margin-top: 15px;">If you want to change your package, then click <strong>Buy</strong> from Our packages list.</p>
+    
+   
+    <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+</div>
+  </div>
+
+  @endif
+
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
      <h1 class="pricing_title" style="font-size: 35px; font-weight: bold;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
       Pricing List
   
   
-</font></font></h1>
+     </font></font></h1>
  
 
     <p class="lead" style="margin-top: 10px; margin-bottom: 25px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -241,7 +269,7 @@ out</a>
           <li>Total Tracking - {{$package->max_limit}}</li>
          
         </ul>
-        <a href="{{url('/payment/'.$package->id)}}"> <button type="button" class="btn btn-lg btn-block btn-primary">Get started</button></a>
+        <a href="{{url('/payment/'.$package->id)}}"> <button type="button" class="btn btn-lg btn-block btn-primary">Buy this One</button></a>
        
       </div>
 
