@@ -35,12 +35,15 @@ class TrackingController extends Controller
               $this_users_limit = DB::table('packages')
                   ->where('packages.id', Auth::user()->package_id)
                   ->first();
+
+            $users_packages = Auth()->user()->package_id;
+            return view('seller.manage-tracking', compact('shippers', 'users_packages', 'total_tracking_orders', 'this_users_limit'));
           }
 
-      
+      return view('seller.manage-tracking', compact('shippers', 'total_tracking_orders'));
 
-        $users_packages = Auth()->user()->package_id;
-        return view('seller.manage-tracking', compact('shippers', 'users_packages', 'total_tracking_orders', 'this_users_limit'));
+       
+        
     }
 
     public function data(Request $request)

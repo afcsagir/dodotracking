@@ -92,10 +92,14 @@ if(!empty(Auth::user()->package_id)){
           
 ?>
 
+ @if(isset($users_packages))
+<x-card title="Manage Tracking (Used - {{count($total_tracking_orders)}} , Max Limit- {{$max_limits}})">
+ @else
+<x-card title="Manage Tracking">
 
-<x-card title="Manage Tracking 
+ @endif
 
-(Used - {{count($total_tracking_orders)}} , Max Limit- {{$max_limits}})">
+
 
   @if(empty($users_packages))
   <x-alert-danger>You have No packages purchased yet. please choose a package from here.

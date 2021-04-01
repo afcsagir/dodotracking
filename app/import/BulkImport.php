@@ -24,6 +24,7 @@ class BulkImport implements ToModel
             ->insert([
                 'shipper_id' => $shipper_id,
                 'tracking_id' => $row[1],
+                'seller_id' =>Auth::user()->id,
                 'buyer' => $row[0],
                 'input_method' => 'import',
                 'date' => today('Asia/Jakarta')->toDateString(),
