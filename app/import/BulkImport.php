@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use Maatwebsite\Excel\Concerns\ToModel;
 use Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -20,12 +21,12 @@ class BulkImport implements ToModel
         if($row[0] != "name")
         {
             
-            DB::table('orders')
-            ->insert([
+            DB::table('orders')->insert([
                 'shipper_id' => $shipper_id,
                 'tracking_id' => $row[1],
                 'seller_id' =>Auth::user()->id,
                 'buyer' => $row[0],
+                'seller_id' => Auth::user()->id,
                 'input_method' => 'import',
                 'date' => today('Asia/Jakarta')->toDateString(),
                 'time' => now('Asia/Jakarta')->toTimeString()
