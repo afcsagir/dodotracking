@@ -27,7 +27,7 @@ class TrackingController extends Controller
           ->whereDate('orders.date', $today_date)
           ->get();
 
-          $this_users_limit = '';
+        //   $this_users_limit = '';
 
          
 
@@ -154,6 +154,7 @@ class TrackingController extends Controller
             
         }
     }
+
     public function update(Request $request)
     {
         $input = $request->all();
@@ -206,53 +207,37 @@ class TrackingController extends Controller
 
     public function import_new(Request $request)
     {
+        $today_date = date('Y-m-d');
+
+        $total_tracking_orders = DB::table('orders')
+          ->where('orders.seller_id', Auth::user()->id)
+          ->whereDate('orders.date', $today_date)
+          ->get();
+
+          
+
+          if(!empty(Auth::user()->package_id)){
+              $this_users_limit = DB::table('packages')
+                  ->where('packages.id', Auth::user()->package_id)
+                  ->first();
+
+                if(count($total_tracking_orders) <  $this_users_limit->max_limit){
+
+                    $input = $request->all();
+                    Session::put('shipper_id', $request->shipper); 
+                    if ($request->hasFile('file')) {
+                        $result =  Excel::import(new BulkImport,request()->file('file'));
+                    }
+                    Session::forget('shipper_id'); 
+                    if($result){
+                        return redirect()->back()->with('success', 'Data successfully Uploaded');
+                    }
+                }
+                else{
+                    return redirect()->back()->with('danger', 'Your Todays Limit is Over');
+                }
+            }
        
-
-        $input = $request->all();
-        Session::put('shipper_id', $request->shipper); 
-        if ($request->hasFile('file')) {
-           $result =  Excel::import(new BulkImport,request()->file('file'));
-          }
-          Session::forget('shipper_id'); 
-
-        // $validator = Validator::make($input, [
-        //     'name' => 'required|string',
-        //     'trackingId' => 'required|string',
-        //     'shipper' => 'required|numeric'// |exists'// :shippers,id',
-        // ], [
-        //     'required' => 'Please fill :attribute',
-        //     'string' => 'The :attribute must be valid value',
-        //     'numeric' => 'The :attribute must be valid value',
-        //     // 'exists' => "Youre choose wrong shipper"
-        // ]);
-
-        // if (false) {
-        //     // return error here
-        //     return response()->json($validator, 419);
-        // } else {
-
-        //     foreach ($request->data[0] as $data) {
-
-        //         DB::table('orders')->insert([
-        //             'shipper_id' => $request->shipper,
-        //             'shop_id' => Auth()->user()->shop_id,
-        //             'tracking_id' => $data['trackingId'],
-        //             'buyer' => $data['name'],
-        //             'phone' => $data['phone'],
-        //             'input_method' => 'import',
-        //             'date' => today('Asia/Jakarta')->toDateString(),
-        //             'time' => now('Asia/Jakarta')->toTimeString()
-        //         ]);
-        //     }
-        // }
-
-        // return response()->json([
-        //     'status' => 1
-        // ], 200);
-
-        if($result){
-            return redirect()->back()->with('success', 'Data successfully Uploaded');
-        }
     }
 
     public function validateInput(array $input)

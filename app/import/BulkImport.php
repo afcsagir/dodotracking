@@ -20,17 +20,34 @@ class BulkImport implements ToModel
         $shipper_id = Session::get('shipper_id');
         if($row[0] != "name")
         {
-            
-            DB::table('orders')->insert([
-                'shipper_id' => $shipper_id,
-                'tracking_id' => $row[1],
-                'seller_id' =>Auth::user()->id,
-                'buyer' => $row[0],
-                'seller_id' => Auth::user()->id,
-                'input_method' => 'import',
-                'date' => today('Asia/Jakarta')->toDateString(),
-                'time' => now('Asia/Jakarta')->toTimeString()
-            ]);
+            $today_date = date('Y-m-d');
+
+            $total_tracking_orders = DB::table('orders')
+              ->where('orders.seller_id', Auth::user()->id)
+              ->whereDate('orders.date', $today_date)
+              ->get();
+    
+              
+    
+              if(!empty(Auth::user()->package_id)){
+                  $this_users_limit = DB::table('packages')
+                      ->where('packages.id', Auth::user()->package_id)
+                      ->first();
+    
+                    if(count($total_tracking_orders) <  $this_users_limit->max_limit){
+    
+                        DB::table('orders')->insert([
+                            'shipper_id' => $shipper_id,
+                            'tracking_id' => $row[1],
+                            'buyer' => $row[0],
+                            'seller_id' => Auth::user()->id,
+                            'input_method' => 'import',
+                            'date' => today('Asia/Jakarta')->toDateString(),
+                            'time' => now('Asia/Jakarta')->toTimeString()
+                        ]);
+                    }
+                }
+      
         }
 
     }

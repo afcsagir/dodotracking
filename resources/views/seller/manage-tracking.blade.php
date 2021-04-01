@@ -85,16 +85,17 @@
 
 <?php 
 $max_limits  = '';
+$message = '';
 if(!empty(Auth::user()->package_id)){
-         $max_limits = $this_users_limit->max_limit;
-          }  
-          
-          
+      $max_limits = $this_users_limit->max_limit;
+      $message =  '(Used - '.count($total_tracking_orders).' , Max Limit-' .$max_limits. ')';
+    }          
 ?>
 
 
 
-<x-card title="Manage Tracking (Used - {{count($total_tracking_orders)}} , Max Limit- {{$max_limits}})">
+
+<x-card title="Manage Tracking {{ $message }}">
 
   @if(empty($users_packages))
   <x-alert-danger>You have No packages purchased yet. please choose a package from here.
@@ -105,19 +106,19 @@ if(!empty(Auth::user()->package_id)){
 
    <div class="mt-4">
      @if(session('danger'))
-      <x-alert-danger>{{ session('danger') }}</x-alert-danger>
+        <x-alert-danger>{{ session('danger') }}</x-alert-danger>
       @endif
       @if(session('success'))
                 <x-alert-success>{{ session('success') }}</x-alert-success>
-                @endif
+      @endif
       @if ($errors->any())
-      <x-alert-danger>
-        <ul class="mt-3 list-disc list-inside text-sm text-red-600">
-          @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-          @endforeach
-        </ul>
-    </x-alert-danger>
+          <x-alert-danger>
+            <ul class="mt-3 list-disc list-inside text-sm text-red-600">
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+        </x-alert-danger>
       @endif
 
       <button style="margin-top: -15px;" class="btns" id="BtnInsert"><i class="fa fa-plus"></i> Add</button>
@@ -137,13 +138,13 @@ if(!empty(Auth::user()->package_id)){
           d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z" />
         </svg>
       </x-button> -->
-   <!--    <x-button color="green" id="BtnImport">
-        <p class="mr-1">Import</p>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px">
-          <path d="M0 0h24v24H0z" fill="none" />
-          <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
-        </svg>
-      </x-button> -->
+      <!--    <x-button color="green" id="BtnImport">
+            <p class="mr-1">Import</p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="18px" height="18px">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z" />
+            </svg>
+          </x-button> -->
       <div class="my-4">
         <x-input type="date" name="input-date" id="inputDate">
         </x-input>
